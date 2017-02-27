@@ -32,7 +32,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -66,9 +66,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link href="../../../../css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Image Classification," />
@@ -80,7 +80,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="../../../../favicon.ico?v=5.1.0" />
 
 
 
@@ -93,25 +93,25 @@
 <meta property="og:url" content="http://verdin.cn/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/index.html">
 <meta property="og:site_name" content="Verdin小站">
 <meta property="og:description" content="L2: Image Classification: k-Nearest Neighbor0. Image Classification 图像分类目标：这一节我们将介绍图像分类问题。所谓图像分类问题，就是已有固定的分类标签集合，然后对于输入的图像，从分类标签集合中找出一个分类标签，最后把分类标签分配给该输入图像。虽然看起来挺简单的，但这可是计算机视觉领域的核心问题之一，并且有着各种各样的实际应用。在">
-<meta property="og:image" content="http://verdin.cn/./Images/l2_1.png">
-<meta property="og:image" content="http://verdin.cn/./Images/l2-2.jpg">
-<meta property="og:image" content="http://verdin.cn/./Images/l2-3.jpg">
-<meta property="og:image" content="http://verdin.cn/./Images/l2-4.jpg">
-<meta property="og:image" content="http://verdin.cn/./Images/l2_5.png">
-<meta property="og:image" content="http://verdin.cn/./Images/l2-6.jpg">
-<meta property="og:image" content="http://verdin.cn/./Images/l2_7.png">
-<meta property="og:image" content="http://verdin.cn/./Images/l2-8.jpg">
-<meta property="og:image" content="http://verdin.cn/./Images/l2_9.png">
-<meta property="og:image" content="http://verdin.cn/./Images/l2-10.jpg">
-<meta property="og:image" content="http://verdin.cn/./Images/l2_11.png">
-<meta property="og:image" content="http://verdin.cn/./Images/l2-12.jpg">
-<meta property="og:image" content="http://verdin.cn/./Images/l2_traditional_pipeline.png">
-<meta property="og:image" content="http://verdin.cn/./Images/l2_deep_learning_pipline.png">
+<meta property="og:image" content="http://verdin.cn/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2_1.png">
+<meta property="og:image" content="http://verdin.cn/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2-2.jpg">
+<meta property="og:image" content="http://verdin.cn/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2-3.jpg">
+<meta property="og:image" content="http://verdin.cn/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2-4.jpg">
+<meta property="og:image" content="http://verdin.cn/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2_5.png">
+<meta property="og:image" content="http://verdin.cn/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2-6.jpg">
+<meta property="og:image" content="http://verdin.cn/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2_7.png">
+<meta property="og:image" content="http://verdin.cn/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2-8.jpg">
+<meta property="og:image" content="http://verdin.cn/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2_9.png">
+<meta property="og:image" content="http://verdin.cn/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2-10.jpg">
+<meta property="og:image" content="http://verdin.cn/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2_11.png">
+<meta property="og:image" content="http://verdin.cn/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2-12.jpg">
+<meta property="og:image" content="http://verdin.cn/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2_traditional_pipeline.png">
+<meta property="og:image" content="http://verdin.cn/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2_deep_learning_pipline.png">
 <meta property="og:updated_time" content="2017-02-27T15:04:56.564Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="L2_Image_Classification_k-Nearest_Neighbor">
 <meta name="twitter:description" content="L2: Image Classification: k-Nearest Neighbor0. Image Classification 图像分类目标：这一节我们将介绍图像分类问题。所谓图像分类问题，就是已有固定的分类标签集合，然后对于输入的图像，从分类标签集合中找出一个分类标签，最后把分类标签分配给该输入图像。虽然看起来挺简单的，但这可是计算机视觉领域的核心问题之一，并且有着各种各样的实际应用。在">
-<meta name="twitter:image" content="http://verdin.cn/./Images/l2_1.png">
+<meta name="twitter:image" content="http://verdin.cn/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2_1.png">
 
 
 
@@ -217,7 +217,7 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
+          <a href="" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
@@ -227,7 +227,7 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
+          <a href="" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -237,7 +237,7 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
+          <a href="" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
@@ -247,7 +247,7 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
+          <a href="" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -257,7 +257,7 @@
       
         
         <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
+          <a href="" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
@@ -294,12 +294,12 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://verdin.cn/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/">
+  <link itemprop="mainEntityOfPage" href="http://verdin.cn">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Verdin">
     <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
+    <meta itemprop="image" content="../../../../images/avatar.gif">
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -352,7 +352,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/#comments" itemprop="discussionUrl">
+                <a href="#comments" itemprop="discussionUrl">
                   <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -381,7 +381,7 @@
       
         <h1 id="L2-Image-Classification-k-Nearest-Neighbor"><a href="#L2-Image-Classification-k-Nearest-Neighbor" class="headerlink" title="L2: Image Classification: k-Nearest Neighbor"></a>L2: Image Classification: k-Nearest Neighbor</h1><h2 id="0-Image-Classification-图像分类"><a href="#0-Image-Classification-图像分类" class="headerlink" title="0. Image Classification 图像分类"></a>0. Image Classification 图像分类</h2><p>目标：这一节我们将介绍图像分类问题。所谓图像分类问题，就是已有固定的分类标签集合，然后对于输入的图像，从分类标签集合中找出一个分类标签，最后把分类标签分配给该输入图像。虽然看起来挺简单的，但这可是计算机视觉领域的核心问题之一，并且有着各种各样的实际应用。在后面的课程中，我们可以看到计算机视觉领域中很多看似不同的问题（比如物体检测和分割），都可以被归结为图像分类问题。</p>
 <p>例子：以下图为例，图像分类模型读取该图片，并生成该图片属于集合 {cat, dog, hat, mug}中各个标签的概率。需要注意的是，对于计算机来说，图像是一个由数字组成的巨大的3维数组。在这个例子中，猫的图像大小是宽248像素，高400像素，有3个颜色通道，分别是红、绿和蓝（简称RGB）。如此，该图像就包含了248X400X3=297600个数字，每个数字都是在范围0-255之间的整型，其中0表示全黑，255表示全白。我们的任务就是把这些上百万的数字变成一个简单的标签，比如“猫”。</p>
-<center><img src="./Images/l2_1.png" alt="l2_1"></center>
+<center><img src="/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2_1.png" alt="l2_1"></center>
 
 <p>图像分类的任务，就是对于一个给定的图像，预测它属于的那个分类标签（或者给出属于一系列不同标签的可能性）。图像是3维数组，数组元素是取值范围从0到255的整数。数组的尺寸是宽度x高度x3，其中这个3代表的是红、绿和蓝3个颜色通道。</p>
 <hr>
@@ -395,10 +395,10 @@
 <li><strong>类内差异（Intra-class variation）：</strong>一类物体的个体之间的外形差异很大，比如椅子。这一类物体有许多不同的对象，每个都有自己的外形。</li>
 </ul>
 <p>面对以上所有变化及其组合，好的图像分类模型能够在维持分类结论稳定的同时，保持对类间差异足够敏感。</p>
-<center><img src="./Images/l2-2.jpg" alt="l2_2"></center>
+<center><img src="/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2-2.jpg" alt="l2_2"></center>
 
 <p><strong>数据驱动方法：</strong>如何写一个图像分类的算法呢？这和写个排序算法可是大不一样。怎么写一个从图像中认出猫的算法？搞不清楚。因此，与其在代码中直接写明各类物体到底看起来是什么样的，倒不如说我们采取的方法和教小孩儿看图识物类似：给计算机很多数据，然后实现学习算法，让计算机学习到每个类的外形。这种方法，就是数据驱动方法。既然该方法的第一步就是收集已经做好分类标注的图片来作为训练集，那么下面就看看数据库到底长什么样：</p>
-<center><img src="./Images/l2-3.jpg" alt="l2_3"></center>
+<center><img src="/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2-3.jpg" alt="l2_3"></center>
 
 <p>一个有4个视觉分类的训练集。在实际中，我们可能有上千的分类，每个分类都有成千上万的图像。</p>
 <hr>
@@ -410,16 +410,16 @@
 </ul>
 <h2 id="1-First-Classifier-Nearest-Neighbor-Classifier"><a href="#1-First-Classifier-Nearest-Neighbor-Classifier" class="headerlink" title="1. First Classifier: Nearest Neighbor Classifier"></a>1. First Classifier: Nearest Neighbor Classifier</h2><p>作为课程介绍的第一个方法，我们来实现一个<strong>Nearest Neighbor分类器</strong>。虽然这个分类器和卷积神经网络没有任何关系，实际中也极少使用，但通过实现它，可以让读者对于解决图像分类问题的方法有个基本的认识。</p>
 <p><strong>图像分类数据集：CIFAR-10</strong>。一个非常流行的图像分类数据集是<a href="http://www.cs.toronto.edu/~kriz/cifar.html" target="_blank" rel="external">CIFAR-10</a>。这个数据集包含了60000张32X32的小图像。每张图像都有10种分类标签中的一种。这60000张图像被分为包含50000张图像的训练集和包含10000张图像的测试集。在下图中你可以看见10个类的10张随机图片。</p>
-<center><img src="./Images/l2-4.jpg" alt="l2_4"></center>
+<center><img src="/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2-4.jpg" alt="l2_4"></center>
 
 <p><strong>左边：</strong>从<a href="http://www.cs.toronto.edu/~kriz/cifar.html" target="_blank" rel="external">CIFAR-10</a>数据库来的样本图像。<strong>右边：</strong>第一列是测试图像，然后第一列的每个测试图像右边是使用Nearest Neighbor算法，根据像素差异，从训练集中选出的10张最类似的图片。</p>
 <hr>
 <p>假设现在我们有CIFAR-10的50000张图片（每种分类5000张）作为训练集，我们希望将余下的10000作为测试集并给他们打上标签。Nearest Neighbor算法将会拿着测试图片和训练集中每一张图片去比较，然后将它认为最相似的那个训练集图片的标签赋给这张测试图片。上面右边的图片就展示了这样的结果。请注意上面10个分类中，只有3个是准确的。比如第8行中，马头被分类为一个红色的跑车，原因在于红色跑车的黑色背景非常强烈，所以这匹马就被错误分类为跑车了。</p>
 <p>那么具体如何比较两张图片呢？在本例中，就是比较32x32x3的像素块。最简单的方法就是逐个像素比较，最后将差异值全部加起来。换句话说，就是将两张图片先转化为两个向量I_1和I_2，然后计算他们的<strong>L1距离：</strong></p>
-<center><img src="./Images/l2_5.png" alt="l2_5"></center>
+<center><img src="/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2_5.png" alt="l2_5"></center>
 
 <p>这里的求和是针对所有的像素。下面是整个比较流程的图例：</p>
-<center><img src="./Images/l2-6.jpg" alt="l2_6"></center>
+<center><img src="/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2-6.jpg" alt="l2_6"></center>
 
 <p>以图片中的一个颜色通道为例来进行说明。两张图片使用L1距离来进行比较。逐个像素求差值，然后将所有差值加起来得到一个数值。如果两张图片一模一样，那么L1距离为0，但是如果两张图片很是不同，那L1值将会非常大。</p>
 <hr>
@@ -465,7 +465,7 @@ class NearestNeighbor(object):
     return Ypred
 </code></pre><p>如果你用这段代码跑CIFAR-10，你会发现准确率能达到38.6%。这比随机猜测的10%要好，但是比人类识别的水平（据研究推测是94%）和卷积神经网络能达到的95%还是差多了。点击查看基于CIFAR-10数据的Kaggle算法竞赛排行榜。</p>
 <p>距离选择：计算向量间的距离有很多种方法，另一个常用的方法是L2距离，从几何学的角度，可以理解为它在计算两个向量间的欧式距离。L2距离的公式如下：</p>
-<center><img src="./Images/l2_7.png" alt="l2_7"></center>
+<center><img src="/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2_7.png" alt="l2_7"></center>
 
 <p>换句话说，我们依旧是在计算像素间的差值，只是先求其平方，然后把这些平方全部加起来，最后对这个和开方。在Numpy中，我们只需要替换上面代码中的1行代码就行：</p>
 <pre><code>distances = np.sqrt(np.sum(np.square(self.Xtr - X[i,:]), axis = 1))
@@ -473,7 +473,7 @@ class NearestNeighbor(object):
 <p>L1和L2比较。比较这两个度量方式是挺有意思的。在面对两个向量之间的差异时，L2比L1更加不能容忍这些差异。也就是说，相对于1个巨大的差异，L2距离更倾向于接受多个中等程度的差异。L1和L2都是在p-norm常用的特殊形式。</p>
 <p><strong>k-Nearest Neighbor分类器</strong></p>
 <p>你可能注意到了，为什么只用最相似的1张图片的标签来作为测试图像的标签呢？这不是很奇怪吗！是的，使用k-Nearest Neighbor分类器就能做得更好。它的思想很简单：与其只找最相近的那1个图片的标签，我们找最相似的k个图片的标签，然后让他们针对测试图片进行投票，最后把票数最高的标签作为对测试图片的预测。所以当k=1的时候，k-Nearest Neighbor分类器就是Nearest Neighbor分类器。从直观感受上就可以看到，更高的k值可以让分类的效果更平滑，使得分类器对于异常值更有抵抗力。</p>
-<center><img src="./Images/l2-8.jpg" alt="l2_8"></center>
+<center><img src="/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2-8.jpg" alt="l2_8"></center>
 
 <p>上面示例展示了Nearest Neighbor分类器和5-Nearest Neighbor分类器的区别。例子使用了2维的点来表示，分成3类（红、蓝和绿）。不同颜色区域代表的是使用L2距离的分类器的决策边界。白色的区域是分类模糊的例子（即图像与两个以上的分类标签绑定）。需要注意的是，在NN分类器中，异常的数据点（比如：在蓝色区域中的绿点）制造出一个不正确预测的孤岛。5-NN分类器将这些不规则都平滑了，使得它针对测试数据的泛化（generalization）能力更好（例子中未展示）。注意，5-NN中也存在一些灰色区域，这些区域是因为近邻标签的最高票数相同导致的（比如：2个邻居是红色，2个邻居是蓝色，还有1个是绿色）。</p>
 <hr>
@@ -506,12 +506,12 @@ for k in [1, 3, 5, 10, 20, 50, 100]:
 </code></pre><p>程序结束后，我们会作图分析出哪个k值表现最好，然后用这个k值来跑真正的测试集，并作出对算法的评价。</p>
 <p><em>把训练集分成训练集和验证集。使用验证集来对所有超参数调优。最后只在测试集上跑一次并报告结果。</em></p>
 <p><strong>交叉验证:</strong>有时候，训练集数量较小（因此验证集的数量更小），人们会使用一种被称为交叉验证的方法，这种方法更加复杂些。还是用刚才的例子，如果是交叉验证集，我们就不是取1000个图像，而是将训练集平均分成5份，其中4份用来训练，1份用来验证。然后我们循环着取其中4份来训练，其中1份来验证，最后取所有5次验证结果的平均值作为算法验证结果。</p>
-<center><img src="./Images/l2_9.png" alt="l2_9"></center>
+<center><img src="/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2_9.png" alt="l2_9"></center>
 
 <p>这就是5份交叉验证对k值调优的例子。针对每个k值，得到5个准确率结果，取其平均值，然后对不同k值的平均表现画线连接。本例中，当k=7的时算法表现最好（对应图中的准确率峰值）。如果我们将训练集分成更多份数，直线一般会更加平滑（噪音更少）。</p>
 <hr>
 <p>实际应用。在实际情况下，人们不是很喜欢用交叉验证，主要是因为它会耗费较多的计算资源。一般直接把训练集按照50%-90%的比例分成训练集和验证集。但这也是根据具体情况来定的：如果超参数数量多，你可能就想用更大的验证集，而验证集的数量不够，那么最好还是用交叉验证吧。至于分成几份比较好，一般都是分成3、5和10份。</p>
-<center><img src="./Images/l2-10.jpg" alt="l2_10"></center>
+<center><img src="/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2-10.jpg" alt="l2_10"></center>
 
 <p>常用的数据分割模式。给出训练集和测试集后，训练集一般会被均分。这里是分成5份。前面4份用来训练，黄色那份用作验证集调优。如果采取交叉验证，那就各份轮流作为验证集。最后模型训练完毕，超参数都定好了，让模型跑一次（而且只跑一次）测试集，以此测试结果评价算法。</p>
 <hr>
@@ -519,12 +519,12 @@ for k in [1, 3, 5, 10, 20, 50, 100]:
 <p>现在对Nearest Neighbor分类器的优缺点进行思考。首先，Nearest Neighbor分类器易于理解，实现简单。其次，算法的训练不需要花时间，因为其训练过程只是将训练集数据存储起来。然而测试要花费大量时间计算，因为每个测试图像需要和所有存储的训练图像进行比较，这显然是一个缺点。在实际应用中，我们关注测试效率远远高于训练效率。其实，我们后续要学习的卷积神经网络在这个权衡上走到了另一个极端：虽然训练花费很多时间，但是一旦训练完成，对新的测试数据进行分类非常快。这样的模式就符合实际使用需求。</p>
 <p>Nearest Neighbor分类器的计算复杂度研究是一个活跃的研究领域，若干<strong>Approximate Nearest Neighbor</strong>(ANN)算法和库的使用可以提升Nearest Neighbor分类器在数据上的计算速度（比如：<a href="http://www.cs.ubc.ca/research/flann/" target="_blank" rel="external">FLANN</a>）。这些算法可以在准确率和时空复杂度之间进行权衡，并通常依赖一个预处理/索引过程，这个过程中一般包含kd树的创建和k-means算法的运用。</p>
 <p>Nearest Neighbor分类器在某些特定情况（比如数据维度较低）下，可能是不错的选择。但是在实际的图像分类工作中，很少使用。因为图像都是高维度数据（他们通常包含很多像素），而高维度向量之间的距离通常是反直觉的。下面的图片展示了基于像素的相似和基于感官的相似是有很大不同的：</p>
-<center><img src="./Images/l2_11.png" alt="l2_11"></center>
+<center><img src="/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2_11.png" alt="l2_11"></center>
 
 <p>在高维度数据上，基于像素的的距离和感官上的非常不同。上图中，右边3张图片和左边第1张原始图片的L2距离是一样的。很显然，基于像素比较的相似和感官上以及语义上的相似是不同的。</p>
 <hr>
 <p>这里还有个视觉化证据，可以证明使用像素差异来比较图像是不够的。z这是一个叫做t-SNE的可视化技术，它将CIFAR-10中的图片按照二维方式排布，这样能很好展示图片之间的像素差异值。在这张图片中，排列相邻的图片L2距离就小。</p>
-<center><img src="./Images/l2-12.jpg" alt="l2_12"></center>
+<center><img src="/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2-12.jpg" alt="l2_12"></center>
 
 <p>上图使用t-SNE的可视化技术将CIFAR-10的图片进行了二维排列。排列相近的图片L2距离小。可以看出，图片的排列是被背景主导而不是图片语义内容本身主导。</p>
 <hr>
@@ -558,9 +558,9 @@ for k in [1, 3, 5, 10, 20, 50, 100]:
 <li>对最优的超参数做记录。记录最优参数后，是否应该让使用最优参数的算法在完整的训练集上运行并再次训练呢？因为如果把验证集重新放回到训练集中（自然训练集的数据量就又变大了），有可能最优参数又会有所变化。在实践中，<strong>不要这样做</strong>。千万不要在最终的分类器中使用验证集数据，这样做会破坏对于最优参数的估计。<strong>直接使用测试集来测试用最优参数设置好的最优模型</strong>，得到测试集数据的分类准确率，并以此作为你的kNN分类器在该数据上的性能表现。</li>
 </ol>
 <h2 id="Image-Classfication-Pipeline"><a href="#Image-Classfication-Pipeline" class="headerlink" title="Image Classfication Pipeline"></a>Image Classfication Pipeline</h2><p>traditional pipeline</p>
-<p><img src="./Images/l2_traditional_pipeline.png" alt="l2_traditional_pipeline"></p>
+<p><img src="/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2_traditional_pipeline.png" alt="l2_traditional_pipeline"></p>
 <p>deep learning pipeline</p>
-<p><img src="./Images/l2_deep_learning_pipline.png" alt="l2_deep_learning_pipline"></p>
+<p><img src="/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/l2_deep_learning_pipline.png" alt="l2_deep_learning_pipline"></p>
 
       
     </div>
@@ -584,7 +584,7 @@ for k in [1, 3, 5, 10, 20, 50, 100]:
       
         <div class="post-tags">
           
-            <a href="/tags/Image-Classification/" rel="tag"># Image Classification</a>
+            <a href="../../../../tags/Image-Classification/" rel="tag"># Image Classification</a>
           
         </div>
       
@@ -597,7 +597,7 @@ for k in [1, 3, 5, 10, 20, 50, 100]:
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/26/L1-Overview-of-the-Course/" rel="next" title="L1: Overview of the Course">
+              <a href="../../26/L1-Overview-of-the-Course/" rel="next" title="L1: Overview of the Course">
                 <i class="fa fa-chevron-left"></i> L1: Overview of the Course
               </a>
             
@@ -701,7 +701,7 @@ var duoshuoQuery = {short_name:"verdin"};
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
+               src="../../../../images/avatar.gif"
                alt="Verdin" />
           <p class="site-author-name" itemprop="name">Verdin</p>
            
@@ -712,7 +712,7 @@ var duoshuoQuery = {short_name:"verdin"};
         
           
             <div class="site-state-item site-state-posts">
-              <a href="/archives">
+              <a href="../../../../archives">
                 <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">日志</span>
               </a>
@@ -723,7 +723,7 @@ var duoshuoQuery = {short_name:"verdin"};
 
           
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
+              <a href="../../../../tags">
                 <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
               </a>
@@ -844,46 +844,46 @@ var duoshuoQuery = {short_name:"verdin"};
 
 
   
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  <script type="text/javascript" src="../../../../lib/jquery/index.js?v=2.1.3"></script>
 
   
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
   
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  <script type="text/javascript" src="../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
   
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script type="text/javascript" src="../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
 
   
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  <script type="text/javascript" src="../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
   
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
-
+  <script type="text/javascript" src="../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+  <script type="text/javascript" src="../../../../js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="../../../../js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="../../../../js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../js/src/bootstrap.js?v=5.1.0"></script>
 
 
 
@@ -909,8 +909,8 @@ var duoshuoQuery = {short_name:"verdin"};
   
     
     
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
+    <script src="../../../../lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="../../../../js/src/hook-duoshuo.js"></script>
   
 
 
