@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Clustering," />
 
 
 
@@ -87,42 +87,41 @@
 
 
 
-<meta name="description" content="L3: Loss Functions and Optimization1. SVM losssvm loss function:
+<meta name="description" content="最近看了下聚类算法，在此记个笔记。
+cousera上不错的clustering公开课 jiawei han
 
-with regularization:
+为什么基于距离的聚类算法只能发现类圆形？
 
-加入regularization后，可以防止模型过于复杂，从而防止过拟合。因为过于复杂的参数在loss function中会受到惩罚。
-2. Softmax losssoftmax function:
-
-softmax lo">
+这和你选择的范数有关，因为是在欧式空间内求的距离，对应的就是周围点到中心点的距离，只管看起来就是画圆圈啊，确定了半径，圆圈内的都是这个类了。但是这只是在欧式空间内对欧氏距离的应用，如果你对流行数据做聚类，就会发现这个聚类对距离进行了重新的定义，看">
 <meta property="og:type" content="article">
-<meta property="og:title" content="L3-Loss-Functions-and-Optimization">
-<meta property="og:url" content="http://verdin.cn/2017/03/01/L3-Loss-Functions-and-Optimization/index.html">
+<meta property="og:title" content="Summary-of-Clustering">
+<meta property="og:url" content="http://verdin.cn/2017/03/02/Summary-of-Clustering/index.html">
 <meta property="og:site_name" content="Verdin小站">
-<meta property="og:description" content="L3: Loss Functions and Optimization1. SVM losssvm loss function:
+<meta property="og:description" content="最近看了下聚类算法，在此记个笔记。
+cousera上不错的clustering公开课 jiawei han
 
-with regularization:
+为什么基于距离的聚类算法只能发现类圆形？
 
-加入regularization后，可以防止模型过于复杂，从而防止过拟合。因为过于复杂的参数在loss function中会受到惩罚。
-2. Softmax losssoftmax function:
-
-softmax lo">
-<meta property="og:image" content="http://verdin.cn/2017/03/01/L3-Loss-Functions-and-Optimization/l3_svm_loss.png">
-<meta property="og:image" content="http://verdin.cn/2017/03/01/L3-Loss-Functions-and-Optimization/l3_svm_loss_with_regularization.png">
-<meta property="og:image" content="http://verdin.cn/2017/03/01/L3-Loss-Functions-and-Optimization/l3_softmax_function.png">
-<meta property="og:image" content="http://verdin.cn/2017/03/01/L3-Loss-Functions-and-Optimization/l3_softmax_loss_function.png">
-<meta property="og:updated_time" content="2017-03-01T13:12:55.480Z">
+这和你选择的范数有关，因为是在欧式空间内求的距离，对应的就是周围点到中心点的距离，只管看起来就是画圆圈啊，确定了半径，圆圈内的都是这个类了。但是这只是在欧式空间内对欧氏距离的应用，如果你对流行数据做聚类，就会发现这个聚类对距离进行了重新的定义，看">
+<meta property="og:image" content="http://verdin.cn/2017/03/02/Summary-of-Clustering/2017-0302-001.jpg">
+<meta property="og:image" content="http://verdin.cn/2017/03/02/Summary-of-Clustering/2017-0302-010.jpg">
+<meta property="og:image" content="http://verdin.cn/2017/03/02/Summary-of-Clustering/2017-0302-002.jpg">
+<meta property="og:image" content="http://verdin.cn/2017/03/02/Summary-of-Clustering/2017-0302-003.jpg">
+<meta property="og:image" content="http://verdin.cn/2017/03/02/Summary-of-Clustering/2017-03-02-004.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/02/Summary-of-Clustering/2017-03-02-005.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/02/Summary-of-Clustering/2017-0302-006.jpg">
+<meta property="og:image" content="http://verdin.cn/2017/03/02/Summary-of-Clustering/2017-03-02-007.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/02/Summary-of-Clustering/2017-0302-008.jpg">
+<meta property="og:updated_time" content="2017-03-02T15:29:32.663Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="L3-Loss-Functions-and-Optimization">
-<meta name="twitter:description" content="L3: Loss Functions and Optimization1. SVM losssvm loss function:
+<meta name="twitter:title" content="Summary-of-Clustering">
+<meta name="twitter:description" content="最近看了下聚类算法，在此记个笔记。
+cousera上不错的clustering公开课 jiawei han
 
-with regularization:
+为什么基于距离的聚类算法只能发现类圆形？
 
-加入regularization后，可以防止模型过于复杂，从而防止过拟合。因为过于复杂的参数在loss function中会受到惩罚。
-2. Softmax losssoftmax function:
-
-softmax lo">
-<meta name="twitter:image" content="http://verdin.cn/2017/03/01/L3-Loss-Functions-and-Optimization/l3_svm_loss.png">
+这和你选择的范数有关，因为是在欧式空间内求的距离，对应的就是周围点到中心点的距离，只管看起来就是画圆圈啊，确定了半径，圆圈内的都是这个类了。但是这只是在欧式空间内对欧氏距离的应用，如果你对流行数据做聚类，就会发现这个聚类对距离进行了重新的定义，看">
+<meta name="twitter:image" content="http://verdin.cn/2017/03/02/Summary-of-Clustering/2017-0302-001.jpg">
 
 
 
@@ -150,13 +149,13 @@ softmax lo">
 
 
 
-  <link rel="canonical" href="http://verdin.cn/2017/03/01/L3-Loss-Functions-and-Optimization/"/>
+  <link rel="canonical" href="http://verdin.cn/2017/03/02/Summary-of-Clustering/"/>
 
 
 
 
 
-  <title> L3-Loss-Functions-and-Optimization | Verdin小站 </title>
+  <title> Summary-of-Clustering | Verdin小站 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -305,7 +304,7 @@ softmax lo">
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://verdin.cn/2017/03/01/L3-Loss-Functions-and-Optimization/">
+  <link itemprop="mainEntityOfPage" href="http://verdin.cn/2017/03/02/Summary-of-Clustering/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Verdin">
@@ -329,7 +328,7 @@ softmax lo">
             
             
               
-                L3-Loss-Functions-and-Optimization
+                Summary-of-Clustering
               
             
           </h1>
@@ -344,8 +343,8 @@ softmax lo">
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-01T20:58:33+08:00">
-                2017-03-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-02T22:12:19+08:00">
+                2017-03-02
               </time>
             
 
@@ -363,8 +362,8 @@ softmax lo">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/01/L3-Loss-Functions-and-Optimization/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/01/L3-Loss-Functions-and-Optimization/" itemprop="commentCount"></span>
+                <a href="/2017/03/02/Summary-of-Clustering/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/02/Summary-of-Clustering/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -390,24 +389,62 @@ softmax lo">
       
 
       
-        <h1 id="L3-Loss-Functions-and-Optimization"><a href="#L3-Loss-Functions-and-Optimization" class="headerlink" title="L3: Loss Functions and Optimization"></a>L3: Loss Functions and Optimization</h1><h2 id="1-SVM-loss"><a href="#1-SVM-loss" class="headerlink" title="1. SVM loss"></a>1. SVM loss</h2><p>svm loss function:</p>
-<p><img src="/2017/03/01/L3-Loss-Functions-and-Optimization/l3_svm_loss.png" alt="svm_loss"></p>
-<p>with regularization:</p>
-<p><img src="/2017/03/01/L3-Loss-Functions-and-Optimization/l3_svm_loss_with_regularization.png" alt="l3_svm_loss_with_regularization"></p>
-<p>加入regularization后，可以防止模型过于复杂，从而防止过拟合。因为过于复杂的参数在loss function中会受到惩罚。</p>
-<h2 id="2-Softmax-loss"><a href="#2-Softmax-loss" class="headerlink" title="2. Softmax loss"></a>2. Softmax loss</h2><p>softmax function:</p>
-<p><img src="/2017/03/01/L3-Loss-Functions-and-Optimization/l3_softmax_function.png" alt="l3_softmax_function"></p>
-<p>softmax loss function (cross-entropy loss):</p>
-<p><img src="/2017/03/01/L3-Loss-Functions-and-Optimization/l3_softmax_loss_function.png" alt="l3_softmax_loss_function"></p>
-<h2 id="3-Optimization-Mini-batch-Gradient-Descent"><a href="#3-Optimization-Mini-batch-Gradient-Descent" class="headerlink" title="3. Optimization: Mini-batch Gradient Descent"></a>3. Optimization: Mini-batch Gradient Descent</h2><p>vanilla minibatch gradient descent:</p>
-<pre><code>while True:
-    data_batch = sample_training_data(data, batch_size)
-    weights_grad = evaluate_gradient(loss_function, data_batch, weights)
-    weights += - step_size * weights_grad  # update formula
-</code></pre><p>we will look at more fancy update formulas (momentum, Adagrad, RMSProp, Adam, …)</p>
-<h2 id="4-Image-Features"><a href="#4-Image-Features" class="headerlink" title="4. Image Features"></a>4. Image Features</h2><p>Color Histogram</p>
-<p>HOG/SIFT features</p>
-<p>Bag of Words</p>
+        <p>最近看了下聚类算法，在此记个笔记。</p>
+<p>cousera上不错的clustering公开课 <a href="http://hanj.cs.illinois.edu/" target="_blank" rel="external">jiawei han</a></p>
+<ul>
+<li>为什么基于距离的聚类算法只能发现类圆形？</li>
+</ul>
+<p>这和你选择的范数有关，因为是在欧式空间内求的距离，对应的就是周围点到中心点的距离，只管看起来就是画圆圈啊，确定了半径，圆圈内的都是这个类了。但是这只是在欧式空间内对欧氏距离的应用，如果你对流行数据做聚类，就会发现这个聚类对距离进行了重新的定义，看起来就不是你所谓的与圆圈之类的。</p>
+<ul>
+<li><a href="https://www.zhihu.com/question/20977382" target="_blank" rel="external">哪种聚类算法可以不需要指定聚类的个数，而且可以生成聚类的规则？</a></li>
+</ul>
+<p><a href="https://www.zhihu.com/question/20759409" target="_blank" rel="external"><strong>聚类算法的经典综述：</strong></a></p>
+<ol>
+<li><a href="https://link.springer.com/chapter/10.1007%2F978-3-540-87479-9_3" target="_blank" rel="external">Data Clustering</a></li>
+<li><a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.318.2219&amp;rep=rep1&amp;type=pdf" target="_blank" rel="external">Survey of Clustering Algorithms</a></li>
+<li><a href="https://link.springer.com/article/10.1007%2Fs40745-015-0040-1" target="_blank" rel="external">A Comprehensive Survey of Clustering Algorithms. Annals of Data Science</a></li>
+</ol>
+<h2 id="k-means聚类算法优缺点"><a href="#k-means聚类算法优缺点" class="headerlink" title="k-means聚类算法优缺点"></a>k-means聚类算法优缺点</h2><p>优点：</p>
+<ol>
+<li>计算速度快</li>
+<li>已解释</li>
+<li>效果还不错</li>
+<li>相对稳定，谱聚类效果好，层次聚类快</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>对异常值相当敏感</li>
+<li>需要提前知道k值</li>
+<li>收敛慢</li>
+<li>不一定全局最优</li>
+</ol>
+<hr>
+<p>主要读了文章：<a href="http://science.sciencemag.org/content/344/6191/1492" target="_blank" rel="external">Clustering by fast search and find of density peaks</a> Alex Rodriguez, <a href="http://people.sissa.it/~laio/Research/Res_clustering.php" target="_blank" rel="external">Alessandro Laio</a></p>
+<h2 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h2><p>该算法的<strong>两个重要假设</strong>：类簇的中心由一些局部密度比较低的点围绕, 并且这些点距离其他有高局部密度的点的距离都比较大. </p>
+<p>首先定义两个值: 局部密度以及到高局部密度点的距离delta。</p>
+<p>样本点局部密度p：</p>
+<center><img src="/2017/03/02/Summary-of-Clustering/2017-0302-001.jpg" alt="l2_1"></center><br><img src="/2017/03/02/Summary-of-Clustering/2017-0302-010.jpg" alt="l2_1"><br><br>dc是一个截断距离, 是一个参数. 所以相当于距离点di的距离小于的点的个数。文章的实验表明，dc的选择比较鲁棒, 文中dc的推荐值是使得平均每个点的邻居数为样本总数的1%-2%。如果样本点的数量过小即分布过散，可参照mean-shift，采用核密度估计的方法计算每点的局部密度。<br><br>样本点到高局部密度点的距离：<br><center><img src="/2017/03/02/Summary-of-Clustering/2017-0302-002.jpg" alt="l2_1"></center><br>由公式可知，为密度高于样本点的样本点到样本点的最近距离。对于密度最大的点<img src="/2017/03/02/Summary-of-Clustering/2017-0302-003.jpg" alt="l2_1">,。由定义可知，局部密度最大的点肯定是一个中心点。<br><br>## 聚类过程<br><br>计算出所有样本点的局部密度值和到高局部密度点的距离后，可以得到一张决策图。在决策图上挑选出具有较大以及较大的样本点作为类簇中心。<strong>在确定了类簇中心之后, 其它样本点依据局部密度从高到低依先后顺序确定所属的类别，每个人非中心的样本点的类别为邻域内最近的高于该点样本点的点的样本点所属的类别（重要，如此可满足流形）。</strong>图例如下:<br><br><center><img src="/2017/03/02/Summary-of-Clustering/2017-03-02-004.png" alt="l2_1"></center>
+
+<center><strong>聚类过程说明</strong></center>
+
+<p>如图所示，总共有28个样本点，样本点按密度高低从小到大给以标号，即1～28号点局部密度递减。通过图1右侧的决策图，我们筛选出具有较大以及较大的1号和10号点作为类簇中心，其余点按密度从高到低依次赋予所属类簇标号。如首先为2号点赋值，离2号最近的密度高于2号点的为1，因此将1号点所属标号赋予2号；对于3号点，离3号最近的密度高于3号点的为1，因此将1号点所属标号赋予3号；对于4号点，离4号最近的密度高于4号点的为1，因此将1号点所属标号赋予4号；<em>对于5号点，离5号最近的密度高于4号点的为4，因此将4号点所属标号赋予5号……</em>，如此直至标完所有样本点标号。此外，26, 27, 28三个点的也比较大, 但是较小, 所以是异常点.</p>
+<h2 id="聚类分析"><a href="#聚类分析" class="headerlink" title="聚类分析"></a>聚类分析</h2><p>聚类分析主要是评估本文算法对参数以及样本分布的鲁棒性。</p>
+<p> <strong>首先评估样本分布对聚类结果的影响。</strong>在聚类分析中, 通常需要确定每个点划分给某个类簇的可靠性. 在该算法中, 可以首先为每个类簇定义一个边界区域(border region), 亦即划分给该类簇但是距离其他类簇的点的距离小于的点. 然后为每个类簇找到其边界区域的局部密度最大的点, 令其局部密度为. 该类簇中所有局部密度大于的点被认为是类簇核心的一部分(亦即将该点划分给该类簇的可靠性很大), 其余的点被认为是该类簇的光晕(halo), 亦即可以认为是噪音。图例如下：</p>
+<center><img src="/2017/03/02/Summary-of-Clustering/2017-03-02-005.png" alt="l2_1"></center>
+
+<center><strong>样本疏密对聚类结果的影响</strong></center>
+
+<p>A图为生成数据的概率分布, B, C二图为分别从该分布中生成了4000, 1000个点. D, E分别是B, C两组数据的决策图, 可以看到两组数据都只有五个点有具有较大以及较大 这些点作为类簇的中心, 在确定了类簇的中心之后, 每个点被划分到各个类簇(彩色点), 或者是划分到类簇光晕(黑色点)。F图展示的是随着抽样点数量的增多, 聚类的错误率在逐渐下降。由图可知当样本数处于1000～10000时，聚类错误率均为1%以下， 说明该算法对数据疏密具有一定的鲁棒性。</p>
+<center><img src="/2017/03/02/Summary-of-Clustering/2017-0302-006.jpg" alt="l2_1"></center><br><center><strong>阈值dc对算法的影响</strong></center>
+
+<p><strong>其次评估参数对聚类结果的影响。</strong>如图所示，分别设置的值为0.005、0.001，0.005和0.1。由以上4个不同的值，得到4种聚类结果。观察图3可发现，当的值从0.005变化值0.1时，虽然的值变化了20倍，但是聚类结果在感官上并无大的差异。以上说明，本文算法对阈值具有良好的鲁棒性。</p>
+<p><strong>接着评估不同的数据分布对聚类结果的影响。</strong> 图4中的4幅子图中的数据都具有较大的聚类难度。其中，图A的难点在于，类的大小不均衡；图B的难度在于类的数量繁多，且高度重合；图C和图D的难度在于各类在特征空间上分布为非球形。一般来讲，在涉及到利用流形分类的算法中，图C和图D都会作为经典的测试数据。由4幅子图的聚类结果容易看出本文算法对数据分布的鲁棒性。</p>
+<center><img src="/2017/03/02/Summary-of-Clustering/2017-03-02-007.png" alt="l2_1"></center><br><center><strong>不同的数据分布下的聚类效果展示</strong></center>
+
+<p><strong>最后评估不同度量对聚类结果的影响。</strong>如图5所示，对图A中的数据做3种非线性映射分别得到B、C和D三种新的数据分布。由A、B、C和D的聚类结果可以看出，本文算法对度量具有好的鲁棒性。</p>
+<center><img src="/2017/03/02/Summary-of-Clustering/2017-0302-008.jpg" alt="l2_1"></center><br><center><strong>不同的度量对聚类结果的影响</strong></center>
+
+<h2 id="算法总结"><a href="#算法总结" class="headerlink" title="算法总结"></a>算法总结</h2><p>本文提出的算法在本质上是基于流形的做法。本文的算法的过程可以总结为：首先搜索合适的局部密度最大点作为类簇中心，然后再将类簇标签从高密度点向低密度点依次传播。</p>
 
       
     </div>
@@ -429,6 +466,12 @@ softmax lo">
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Clustering/" rel="tag"># Clustering</a>
+          
+        </div>
+      
 
       
         
@@ -438,8 +481,8 @@ softmax lo">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/28/A-beautiful-picture/" rel="next" title="A-beautiful-picture">
-                <i class="fa fa-chevron-left"></i> A-beautiful-picture
+              <a href="/2017/03/02/Optimization/" rel="next" title="Optimization">
+                <i class="fa fa-chevron-left"></i> Optimization
               </a>
             
 			
@@ -449,10 +492,6 @@ softmax lo">
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/01/Linear-Classification/" rel="prev" title="Linear-Classification">
-                Linear-Classification <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -467,10 +506,10 @@ softmax lo">
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2017/03/01/L3-Loss-Functions-and-Optimization/"
-     data-title="L3-Loss-Functions-and-Optimization"
+        <div class="ds-share flat" data-thread-key="2017/03/02/Summary-of-Clustering/"
+     data-title="Summary-of-Clustering"
      data-content=""
-     data-url="http://verdin.cn/2017/03/01/L3-Loss-Functions-and-Optimization/">
+     data-url="http://verdin.cn/2017/03/02/Summary-of-Clustering/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -604,7 +643,7 @@ var duoshuoQuery = {short_name:"verdin"};
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#L3-Loss-Functions-and-Optimization"><span class="nav-number">1.</span> <span class="nav-text">L3: Loss Functions and Optimization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-SVM-loss"><span class="nav-number">1.1.</span> <span class="nav-text">1. SVM loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Softmax-loss"><span class="nav-number">1.2.</span> <span class="nav-text">2. Softmax loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Optimization-Mini-batch-Gradient-Descent"><span class="nav-number">1.3.</span> <span class="nav-text">3. Optimization: Mini-batch Gradient Descent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Image-Features"><span class="nav-number">1.4.</span> <span class="nav-text">4. Image Features</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#k-means聚类算法优缺点"><span class="nav-number">1.</span> <span class="nav-text">k-means聚类算法优缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思想"><span class="nav-number">2.</span> <span class="nav-text">算法思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚类分析"><span class="nav-number">3.</span> <span class="nav-text">聚类分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法总结"><span class="nav-number">4.</span> <span class="nav-text">算法总结</span></a></li></ol></div>
             
 
           </div>
