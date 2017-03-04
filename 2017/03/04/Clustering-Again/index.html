@@ -1,0 +1,892 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Clustering," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="依然是介绍Alex和Alessandro于2014年发表在的Science上的一篇关于聚类的文章 Clustering by fast search and find of density peaks，该文章的基本思想很简单，但是其聚类效果却兼具了谱聚类(Spectral Clustering)[On spectral clustering: Analysis and an algorithm,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Clustering Again">
+<meta property="og:url" content="http://verdin.cn/2017/03/04/Clustering-Again/index.html">
+<meta property="og:site_name" content="Verdin小站">
+<meta property="og:description" content="依然是介绍Alex和Alessandro于2014年发表在的Science上的一篇关于聚类的文章 Clustering by fast search and find of density peaks，该文章的基本思想很简单，但是其聚类效果却兼具了谱聚类(Spectral Clustering)[On spectral clustering: Analysis and an algorithm,">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Clustering-Again/2017-0304-001.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Clustering-Again/2017-0304-002.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Clustering-Again/2017-0304-003.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Clustering-Again/2017-0304-005.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Clustering-Again/2017-0304-006.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Clustering-Again/2017-0304-008.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Clustering-Again/2017-0304-009.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Clustering-Again/2017-0304-010.png">
+<meta property="og:updated_time" content="2017-03-04T15:21:01.758Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Clustering Again">
+<meta name="twitter:description" content="依然是介绍Alex和Alessandro于2014年发表在的Science上的一篇关于聚类的文章 Clustering by fast search and find of density peaks，该文章的基本思想很简单，但是其聚类效果却兼具了谱聚类(Spectral Clustering)[On spectral clustering: Analysis and an algorithm,">
+<meta name="twitter:image" content="http://verdin.cn/2017/03/04/Clustering-Again/2017-0304-001.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://verdin.cn/2017/03/04/Clustering-Again/"/>
+
+
+
+
+
+  <title> Clustering Again | Verdin小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?de255985a34f4b5d76b6cd2f11b8b565";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Verdin小站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://verdin.cn/2017/03/04/Clustering-Again/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Verdin">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Verdin小站">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Verdin小站" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Clustering Again
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-04T22:13:43+08:00">
+                2017-03-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/04/Clustering-Again/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/04/Clustering-Again/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>依然是介绍Alex和Alessandro于2014年发表在的Science上的一篇关于聚类的文章 <a href="http://science.sciencemag.org/content/344/6191/1492" target="_blank" rel="external">Clustering by fast search and find of density peak</a>s，该文章的基本思想很简单，但是其聚类效果却兼具了谱聚类(Spectral Clustering)[<a href="http://www.cs.cornell.edu/courses/cs6780/2010fa/materials/nips01-spectral.pdf" target="_blank" rel="external">On spectral clustering: Analysis and an algorithm</a>, <a href="https://www.cs.cmu.edu/~aarti/Class/10701/slides/Lecture21_2.pdf" target="_blank" rel="external">Spectral clustering</a>, <a href="http://www.cis.rit.edu/~cnspci/references/luxburg2007.pdf" target="_blank" rel="external">A tutorial on spectral clustering</a>]和K-Means的特点，着实激起了极大的兴趣，该聚类算法主要是基于两个基本点：</p>
+<ol>
+<li>聚类中心的密度高于其临近的样本点的密度</li>
+<li>聚类中心与比其密度还高的聚类中心的距离相对较大</li>
+</ol>
+<p>基于这个思想，聚类过程中的聚类中心数目可以很直观的选取，离群点也能被自动检测出来并排除在聚类分析外。无论每个聚类的形状是什么样的，或者样本点的维度是多少，聚类分析的结果都能令人很满意。下面我会主要基于这篇文章来详述该聚类算法的来龙去脉，并简单回顾下相关的聚类算法。</p>
+<h2 id="聚类算法回顾"><a href="#聚类算法回顾" class="headerlink" title="聚类算法回顾"></a>聚类算法回顾</h2><p>众所周知，聚类分析目的在于根据样本之间的相似性将样本划为不同的类簇，但聚类的科学定义貌似在学术界还未达成共识。论文[<a href="https://www.ncbi.nlm.nih.gov/pubmed/15940994" target="_blank" rel="external">Survey of clustering algorithms</a>]对聚类算法进行了综述，发现有好多聚类算法都未曾了解。在K-means和K-medoids中，每个类簇都由一组到各自的聚类中心距离最近的数据组成。两者的目标函数形式为各样本点到对应的聚类中心的距离之和，经过反复的更新聚类中心和重新为样本点分配聚类中心的过程直至收敛，如图1所示。两者的区别在于，K-means的聚类中心为<strong>属于该类簇的所有样本点的均值</strong>，而K-medoids的聚类中心为<strong>该类簇中离所有样本点的聚类之和最小的样本点</strong>。这两者聚类算法实现起来都非常简单，对于紧凑型的和呈超球体状分布的数据非常适用。但两者的缺陷也很明显：</p>
+<ol>
+<li>缺乏能确定类簇数目和进行初步划分的有效机制；</li>
+<li>迭代优化的策略无法保证全局最优解；</li>
+<li>对离群点和噪声非常敏感</li>
+</ol>
+<center><img src="/2017/03/04/Clustering-Again/2017-0304-001.png" alt="l2_1"></center>
+
+
+<p>在基于概率密度的聚类算法中，我们会假设<strong>各类簇由不同的概率密度函数产生</strong>(如图2)，而每个样本点则是以不同的权重服从这些概率分布的。<strong>很不幸的是，在这类算法中用最大似然估计求解参数往往不可行</strong>，只能用迭代求解的方式获得一个次优解，而<strong>期望最大化(Expectation Maximization,EM)</strong>是最常用的一个策略。在这类算法中，最典型的莫过于<strong><a href="http://www.researchgate.net/publication/303672489_Gaussian_Mixture_Models" target="_blank" rel="external">高斯混合模型(Gaussian Mixture Model</a>,GMM)</strong>。这类算法的准确度取决于<strong>预先定义的概率分布能否很好的拟合训练数据</strong>，但问题在于很多情况下我们无法知晓数据在整体上或者局部上到底近似于什么样的概率分布。  </p>
+<center><img src="/2017/03/04/Clustering-Again/2017-0304-002.png" alt="l2_1"></center>
+
+<p>基于局部密度的聚类算法可以很容易地检测出任意形状的类簇。在<a href="https://www.researchgate.net/publication/221653977_A_Density-Based_Algorithm_for_Discovering_Clusters_in_Large_Spatial_Databases_with_Noise" target="_blank" rel="external">DBSCAN</a>中，需要用户给定<strong>密度阈值</strong>和<strong>领域半径</strong>作为参数，在领域半径内的密度小于该阈值的样本点被视为噪声点，剩下的密度较高的非连通区域则被分配到不同的类簇中，其伪代码如下所示。但是选择合适的密度阈值并不是那么容易的事情，有关的参数估计建议可参见<a href="http://en.wikipedia.org/wiki/DBSCAN" target="_blank" rel="external">wiki</a>。DBSCAN的优点总结如下：</p>
+<ol>
+<li>无需预先指定类簇的数目；</li>
+<li>可以发现任意形状的类簇，如图3所示；</li>
+<li>可以检测出噪声点，且对噪声点鲁棒性较强；</li>
+<li>除了边界点外，聚类结果(核心点与噪声点)与样本点的遍历顺序无关。</li>
+</ol>
+<p>DBSCAN的缺点总结如下：</p>
+<ol>
+<li>针对边界点而言，DBSCAN的聚类结果并非完全确定的。幸运的是这种情况并非频繁出现，而且对聚类的结果影响很小。如果把边界点也当成噪声点处理，那么聚类结果就具有确定性。</li>
+<li>聚类结果依赖于距离度量规则。最常用的<strong>欧式距离在高维空间里由于“维度灾难”</strong>几乎无法发挥有效作用，使得设定合适的搜寻半径更为困难。</li>
+<li><p><strong>不适用于密度差异很大的数据集</strong>，因为此时各个类簇的搜寻半径和密度阈值都不相同，使得参数的选取更为困难。</p>
+<pre><code>DBSCAN(D, eps, minPts)
+//eps:search radius
+//minPts:density threshold
+   C = 0
+   for each unvisited point P in dataset D
+      mark P as visited
+      NeighborPts = regionQuery(P, eps)
+      if sizeof(NeighborPts) &lt; minPts
+         mark P as NOISE
+      else
+         C = next cluster
+         expandCluster(P, NeighborPts, C, eps, MinPts)
+
+expandCluster(P, NeighborPts, C, eps, minPts)
+   add P to cluster C
+   for each point Q in NeighborPts 
+      if Q is not visited
+         mark Q as visited
+         NeighborPts&apos; = regionQuery(Q, eps)
+         if sizeof(NeighborPts&apos;) &gt;= minPts
+            NeighborPts = NeighborPts joined with NeighborPts&apos;
+      if Q is not yet member of any cluster
+         add Q to cluster C
+
+regionQuery(P, eps)
+   return all points within P&apos;s eps-neighborhood (including P)
+</code></pre></li>
+</ol>
+<center><img src="/2017/03/04/Clustering-Again/2017-0304-003.png" alt="l2_1"></center>
+
+<p>基于均值漂移(Mean-shift)[<a href="http://en.wikipedia.org/wiki/Mean-shift" target="_blank" rel="external">Mean-shift</a>, <a href="http://ieeexplore.ieee.org/document/1000236/" target="_blank" rel="external">Mean shift: A robust approach toward feature space analysis. Pattern Analysis and Machine Intelligence</a>, <a href="http://www.cse.yorku.ca/~kosta/CompVis_Notes/mean_shift.pdf" target="_blank" rel="external">Mean shift clustering</a>]的聚类算法则无需为<strong>搜索半径</strong>和<strong>密度阈值</strong>的设定而烦恼，不过也面临bandwidth的选取问题，关于怎么设定bandwidth的研究可参见[<a href="http://www.dgp.toronto.edu/~jay/MS bandwidth.pdf" target="_blank" rel="external">The variable bandwidth mean shift and data-driven scale selection</a>, <a href="http://pdf.aminer.org/000/169/427/image_and_video_segmentation_by_anisotr**opic_kernel_mean_shift.pdf" target="_blank" rel="external">Image and video segmentation by anisotropic kernel mean shift</a>]。Mean-sift的基本思路就是从初始点出发，以梯度上升的方式不断寻找核密度估计函数的局部最大值直至收敛<strong>(如图4(a)所示)，这些驻点代表分布的模式。在基于mean-shift的聚类算法中，依次以每一个样本点作为mean-shift的起始点，然后将其移至核密度估计函数的某个局部驻点，最后近似收敛到同一个驻点的所有样本被划分至同一个类簇，如图4(b)所示。总体而言，在基于密度的聚类算法中，</strong>类簇可被定义为收敛到相同的密度分布函数局部极大值的样本点的集合**。 </p>
+<center><img src="/2017/03/04/Clustering-Again/2017-0304-005.png" alt="l2_1"></center>
+
+<h2 id="基于密度峰值和距离的聚类算法"><a href="#基于密度峰值和距离的聚类算法" class="headerlink" title="基于密度峰值和距离的聚类算法"></a>基于密度峰值和距离的聚类算法</h2><p>该聚类算法的假设前提是聚类中心周围的样本点的局部密度低于聚类中心的局部密度，并且聚类中心与比其局部密度更高的点之间的距离相对较大。其聚类效果与DBSCAN和mean-shift类似，可以检测出非球体的类簇。作者号称可以<strong>自动</strong>找到类簇的数目，虽然文中给了一点相关的寻找聚类数目的思路，但是提供的Matlab代码中没有实现该思路，还是需要人工选择聚类中心，所以在相关评论[<a href="http://comments.sciencemag.org/content/10.1126/science.1242072" target="_blank" rel="external">Comments on clustering by fast search and find of density peaks</a>]中“自动”一词遭到了质疑。与mean-shift类似，聚类中心定义为局部密度最大值点；与mean-shift不同的是，聚类中心是某个特定样本点，并且无需在核函数定义的空间内针对每个样本点显式求解局部密度最大的点。 </p>
+<p>根据这篇文章的评论，发现还有两个密度的度量方法也是很有价值的。第一个是用样本点与最近的M个邻居的距离的均值的负数来描述，另一个就是高斯核函数来度量，会比用截断距离度量鲁棒性更强一些。</p>
+<p>对于密度值为局部或全局最大的样本点而言，它们的δi会比其他样本点的δj值要大很多(如图5所示)，因为前者代表局部密度最大的样本点之间的距离，而后者代表样本点与其对应的局部密度最大的样本点之间的距离。因此，那些δ值很大的样本点也很有可能就是聚类中心。 </p>
+<center><img src="/2017/03/04/Clustering-Again/2017-0304-006.png" alt="l2_1"></center>
+
+<p>在找出聚类中心后，接下来就是将所有剩下的点划分到比其密度更高且最近的样本点所属的类簇中，当然经过这一步之后暂时会为噪声点也分配到类簇中。在聚类分析中，经常还会<strong>进一步分析类簇分配的可靠性</strong>。在<strong>DBSCAN</strong>中，只考虑了密度高于密度阈值的可靠性高一些的样本点，但是会出现较低密度的类簇被误认为噪声的情况。文中取而代之的是为每个类簇引入<strong>边界区域</strong>的概念。边界区域的密度值ρb会根据属于这个类簇并且与属于其他类簇的样本点之间的距离小于dc的成员计算出来。对于每个类簇中的所有样本点，密度值高于ρb的被视为类簇的核心组成部分(cluster core)，剩下的则被视为该类簇的<strong>光晕(cluster halo)</strong>，类簇光晕中则包含噪声点。论文中给出了一个聚类的结果，如图7所示。</p>
+<center><img src="/2017/03/04/Clustering-Again/2017-0304-008.png" alt="l2_1"></center>
+
+<p>邻域搜索半径dc到底如何取值呢？dc显然是对聚类结果又影响的，这一点我们仅需要考虑两个最极端的情形就明白了。如果dc太大，那么每个数据点的密度值都近似相等，导致所有数据点被划分至同一个类簇中；如果dc太小，每个类簇包含的样本点会很少，很有可能出现同一个类簇被分割成好几部分的情况。另一方面，不同的数据集中数据点之间的密集程度不同，那么想给出一个适合所有数据集的dcdc是不可能的。作者在文中提出，合适的dc应该使数据点的平均近邻数目占整个数据集规模的比例为τ,<strong>(τ=1%∼2%)</strong>。如此一来，参数τ就独立于特定数据集了。针对每个数据集，我们都可以寻找一个比较合适的dc。结合作者给出的Matlab代码，分析后可知具体的计算方法如下：取出对称的距离矩阵的上三角所有的<strong>M=N(N−1)/2</strong>个元素，然后对其进行升序排列<strong>d1≤d2≤⋯≤dMd1≤d2≤⋯≤dM</strong>。为了保证平均每个数据点的近邻点数目所占比例为τ，那么只要保证小于dcdc的距离数目所占比例也为ττ即可，因此取dc=dround(τM)dc=dround(τM)。 </p>
+<p>类簇的数目该如何确定呢？作者给Matlab代码中，聚类中心是需要人工选定的，很多读者因此质疑文中的”it is able to detect nonspherical clusters and to automatically find the correct number of clusters”，是不是有种被欺骗的感觉。不过作者在文中也给出了一个简单选择类簇的数目，虽然我也觉得该方法存在一些问题，但总归还是给出了解决方案的。由前面解释的论文的两个基本立足点可知，聚类中心对应的ρρ和δδ都是比较大的。作者为每个样本点xi引入γi=ρiδi，然后将所有的γi降序排列后显示在图9(a)。如果分别对ρ和δ先做<strong>归一化处理</strong>后会更合理一些，这样也会使得两者参与决策的权重相当。因为如果ρ和δ的不在一个数量级，那么必然数量级小带来的的影响会很小。</p>
+<p>接下来怎么办呢？作者依然没有给出具体的解决方案。因为整体而言，γ的值在大多数情况下还是很相近的，差异比较大的就是那几个聚类中心，我觉得可以从异常检查(Anomaly Detection)的角度去寻找这个跳跃点。最简单方法，可以根据相邻γ的值构建一个高斯分布N(μ,σ2)，根据最大似然参数估计法，该高斯分布的参数只需扫描两遍γ的值即可，所以模型还是很效率还是很高的。有了这个模型后，我们从后往前扫描γ的值，如果发现某个值的左边或右边的累积概率(如图8的左右两侧蓝色区域)小于阈值(比如0.005)时就判定找到了异常的跳跃点，此时就能大致确定类簇的数目了。若想进一步学习如何利用高斯分布进行异常检测可参见[<a href="http://www.holehouse.org/mlclass/15_Anomaly_Detection.html" target="_blank" rel="external">Anomaly detection</a>]。 我们都知道高斯分布的概率密度函数,可是高斯分布的累积分布函数(Cumulative Distribution Function)不存在初等函数的表达形式,那该如何是好?查找了半天资料,也没找到如何数值逼近的原理说明,不过搜到了一段用java编写的基于Hart Algorithm近似计算标准正态分布的累积分布函数的代码[<a href="http://www.onedigit.org/Home/quantitative-finance/hart-algorithm-for-normal-cdf" target="_blank" rel="external">Hart algorithm for normal cdf</a>]。寥寥数行java代码就搞定了,但是我暂时没理解为什么这么做是可行的。将输出结果和维基百科上的Q函数表[<a href="http://en.wikipedia.org/wiki/Q-function" target="_blank" rel="external">Q-function</a>]中的数据对比分析(注意1−Q(x)=Φ(x)),发现结果和预期的一模一样,简直惊呆。</p>
+<center><img src="/2017/03/04/Clustering-Again/2017-0304-009.png" alt="l2_1"></center>
+
+
+<pre><code>double CDFofNormalDistribution(double x)
+{
+    const double PI=3.1415926;
+    double p0=220.2068679123761;
+    double p1=221.2135961699311;
+    double p2=112.0792914978709;
+    double p3=33.91286607838300;
+    double p4=6.373962203531650;
+    double p5=.7003830644436881;
+    double p6=.03326249659989109;
+
+    double q0=440.4137358247552;
+    double q1=793.8265125199484;
+    double q2=637.3336333788311;
+    double q3=296.5642487796737;
+    double q4=86.78073220294608;
+    double q5=16.06417757920695;
+    double q6=1.755667163182642;
+    double q7=0.08838834764831844;
+
+    double cutoff=7.071;//10/sqrt(2)
+    double root2pi=2.506628274631001;//sqrt(2*PI)
+
+    double xabs=abs(x);
+
+    double res=0;
+    if(x&gt;37.0) 
+        res=1.0;
+    else if(x&lt;-37.0)
+        res=0.0;
+    else
+    {
+        double expntl=exp(-.5*xabs*xabs);
+        double pdf=expntl/root2pi;
+        if(xabs&lt;cutoff)
+            res=expntl*((((((p6*xabs + p5)*xabs + p4)*xabs + p3)*xabs+ \
+                p2)*xabs + p1)*xabs + p0)/(((((((q7*xabs + q6)*xabs + \
+                q5)*xabs + q4)*xabs + q3)*xabs + q2)*xabs + q1)*xabs+q0);
+        else
+            res=pdf/(xabs+1.0/(xabs+2.0/(xabs+3.0/(xabs+4.0/(xabs+0.65)))));
+    }
+    if(x&gt;=0.0)
+        res=1.0-res;
+    return res;
+}
+</code></pre><p>此外，作者声称根据随机均匀分布生成的数据对应的γ服从幂律分布(Power laws)，但是真正具备聚类中心的数据集是不存在这种情况的。很多现象其实都是近似服从幂律分布的，尤其适用于大多数事件的规模很小但少数事件规模很大的场合，不过作者在此并未给出该定论的出处，所以同样这一点遭到了很多读者的质疑。我猜目前只是作者根据一些实验数归纳出来的，只能说是靠不完全统计得到的经验，没有实质性的理论依据。也就是γ≈cr−k+ϵ，其中r为γ的排名序号，那么log⁡γ和log⁡r之间应该近似呈现线性关系，如图9(b)所示。如果作者的猜测正确的话，我们不妨在聚类前汇出如log⁡γ和log⁡r的关系图，借此判断聚类的复杂性，或者说在该数据集上进行聚类的结果可靠性如何。</p>
+<center><img src="/2017/03/04/Clustering-Again/2017-0304-010.png" alt="l2_1"></center>
+
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Clustering/" rel="tag"># Clustering</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/02/Summary-of-Clustering/" rel="next" title="Summary-of-Clustering">
+                <i class="fa fa-chevron-left"></i> Summary-of-Clustering
+              </a>
+            
+			
+			
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/04/What-is-Deep-Forest/" rel="prev" title="What is Deep Forest">
+                What is Deep Forest <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/03/04/Clustering-Again/"
+     data-title="Clustering Again"
+     data-content=""
+     data-url="http://verdin.cn/2017/03/04/Clustering-Again/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+<section id="comment">  
+  <!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="<%- page.path %>" data-title="<%- page.title %>" data-url="<%- page.permalink %>"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"verdin"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</section>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Verdin" />
+          <p class="site-author-name" itemprop="name">Verdin</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#聚类算法回顾"><span class="nav-number">1.</span> <span class="nav-text">聚类算法回顾</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于密度峰值和距离的聚类算法"><span class="nav-number">2.</span> <span class="nav-text">基于密度峰值和距离的聚类算法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Verdin</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+<span id="busuanzi_container_site_pv">
+  . . . . . . . . . 访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+<span id="busuanzi_container_site_uv">
+  _______~欢迎第<span id="busuanzi_value_site_uv"></span>位访客~
+</span>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"verdin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

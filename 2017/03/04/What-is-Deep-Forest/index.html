@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Course Introduction," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -87,34 +87,25 @@
 
 
 
-<meta name="description" content="CS231n: Convolutional Neural Networks for Visual Recognition
-历史课，长长见识，大概浏览一遍即可。
-主要介绍了深度学习与计算机视觉的发展，以及课程要求。
-主讲Fei-Fei Li，很有个性的教授，大名鼎鼎的ImageNet数据集是Feifei基于MIT Torralba早期数据集的拓展。
-Assignments:
+<meta name="description" content="整个算法看起来不是很复杂。
 
-Assignment">
+类似以前Stacking的做法，即每一层都用label进行训练，训练完了再叠一层继续训练。加了Complete Random Forest很有意思，个人理解是生成了一些看似无关，但对将来的预测有好处的特征。如果实验里面能做些ablation analysis就好了。
+用了一些shortcut-connection，把几层前的数据拿过来连上上一层的输出一起作为这一层Fo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="L1-Overview-of-the-Course">
-<meta property="og:url" content="http://verdin.cn/2017/02/26/L1-Overview-of-the-Course/index.html">
+<meta property="og:title" content="What is Deep Forest">
+<meta property="og:url" content="http://verdin.cn/2017/03/04/What-is-Deep-Forest/index.html">
 <meta property="og:site_name" content="Verdin小站">
-<meta property="og:description" content="CS231n: Convolutional Neural Networks for Visual Recognition
-历史课，长长见识，大概浏览一遍即可。
-主要介绍了深度学习与计算机视觉的发展，以及课程要求。
-主讲Fei-Fei Li，很有个性的教授，大名鼎鼎的ImageNet数据集是Feifei基于MIT Torralba早期数据集的拓展。
-Assignments:
+<meta property="og:description" content="整个算法看起来不是很复杂。
 
-Assignment">
-<meta property="og:updated_time" content="2017-03-01T13:13:43.029Z">
+类似以前Stacking的做法，即每一层都用label进行训练，训练完了再叠一层继续训练。加了Complete Random Forest很有意思，个人理解是生成了一些看似无关，但对将来的预测有好处的特征。如果实验里面能做些ablation analysis就好了。
+用了一些shortcut-connection，把几层前的数据拿过来连上上一层的输出一起作为这一层Fo">
+<meta property="og:updated_time" content="2017-03-04T15:36:45.523Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="L1-Overview-of-the-Course">
-<meta name="twitter:description" content="CS231n: Convolutional Neural Networks for Visual Recognition
-历史课，长长见识，大概浏览一遍即可。
-主要介绍了深度学习与计算机视觉的发展，以及课程要求。
-主讲Fei-Fei Li，很有个性的教授，大名鼎鼎的ImageNet数据集是Feifei基于MIT Torralba早期数据集的拓展。
-Assignments:
+<meta name="twitter:title" content="What is Deep Forest">
+<meta name="twitter:description" content="整个算法看起来不是很复杂。
 
-Assignment">
+类似以前Stacking的做法，即每一层都用label进行训练，训练完了再叠一层继续训练。加了Complete Random Forest很有意思，个人理解是生成了一些看似无关，但对将来的预测有好处的特征。如果实验里面能做些ablation analysis就好了。
+用了一些shortcut-connection，把几层前的数据拿过来连上上一层的输出一起作为这一层Fo">
 
 
 
@@ -142,13 +133,13 @@ Assignment">
 
 
 
-  <link rel="canonical" href="http://verdin.cn/2017/02/26/L1-Overview-of-the-Course/"/>
+  <link rel="canonical" href="http://verdin.cn/2017/03/04/What-is-Deep-Forest/"/>
 
 
 
 
 
-  <title> L1-Overview-of-the-Course | Verdin小站 </title>
+  <title> What is Deep Forest | Verdin小站 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -297,7 +288,7 @@ Assignment">
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://verdin.cn/2017/02/26/L1-Overview-of-the-Course/">
+  <link itemprop="mainEntityOfPage" href="http://verdin.cn/2017/03/04/What-is-Deep-Forest/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Verdin">
@@ -321,7 +312,7 @@ Assignment">
             
             
               
-                L1-Overview-of-the-Course
+                What is Deep Forest
               
             
           </h1>
@@ -336,8 +327,8 @@ Assignment">
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-26T23:25:05+08:00">
-                2017-02-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-04T22:14:57+08:00">
+                2017-03-04
               </time>
             
 
@@ -355,8 +346,8 @@ Assignment">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/02/26/L1-Overview-of-the-Course/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/26/L1-Overview-of-the-Course/" itemprop="commentCount"></span>
+                <a href="/2017/03/04/What-is-Deep-Forest/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/04/What-is-Deep-Forest/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -382,16 +373,52 @@ Assignment">
       
 
       
-        <p><a href="http://cs231n.stanford.edu/" target="_blank" rel="external">CS231n</a>: Convolutional Neural Networks for Visual Recognition</p>
-<p>历史课，长长见识，大概浏览一遍即可。</p>
-<p>主要介绍了深度学习与计算机视觉的发展，以及课程要求。</p>
-<p>主讲<a href="https://profiles.stanford.edu/fei-fei-li#" target="_blank" rel="external">Fei-Fei Li</a>，很有个性的教授，大名鼎鼎的ImageNet数据集是Feifei基于MIT Torralba早期数据集的拓展。</p>
-<p><a href="http://cs231n.github.io/" target="_blank" rel="external">Assignments</a>:</p>
+        <p>整个算法看起来不是很复杂。</p>
+<ol>
+<li>类似以前Stacking的做法，即每一层都用label进行训练，训练完了再叠一层继续训练。加了Complete Random Forest很有意思，个人理解是生成了一些看似无关，但对将来的预测有好处的特征。如果实验里面能做些ablation analysis就好了。</li>
+<li>用了一些shortcut-connection，把几层前的数据拿过来连上上一层的输出一起作为这一层Forest的输入。</li>
+<li>Multi-Grained Scanning这部分非常像1D和2D convolution。另外实验还只是在小规模数据集上做的，期待CIFAR甚至是ImageNet的结果。深度学习这里也有一直在提但是一直效果不怎么好的Layer-by-Layer训练的思路，如果这个思路能在大数据集上做好，那确实是大突破了。</li>
+</ol>
+<p>作者：<a href="https://www.zhihu.com/question/56474891/answer/149427631" target="_blank" rel="external">田渊栋</a></p>
+<p>先说我的结论：相比前两天引起了广泛讨论的ICLR best paper，这个paper其实更没有什么讨论的意义。当然作为一个research来说，paper还是可以中的，尤其是对于IJCAI。但是我完全不看好这个paper会有什么长远的影响力，以及有人说的可以启发大量后续研究。下面分别从这个idea，实现方法，以及实验结果三个方面分析。</p>
+<ol>
+<li><strong>Idea：</strong>不用多说，通过stacking weak learner来提升模型性能的想法已经非常常见。然而这样一个idea一定不会work，原罪就在于<strong>tree based model无法进行fine-tune</strong>。这会带来两个非常严重的问题：</li>
+</ol>
 <ul>
-<li>Assignment #1: Image Classification, kNN, SVM, Softmax, Neural Network</li>
-<li>Assignment #2: Fully-Connected Nets, Batch Normalization, Dropout, Convolutional Nets</li>
-<li>Assignment #3: Recurrent Neural Networks, Image Captioning, Image Gradients, DeepDream</li>
+<li><p>A. 无法进行end to end learning，这会极大程度上影响到模型最终的结果。会使depth完全发挥不出威力。</p>
+</li>
+<li><p>B. 无法进行feature transfer，CNN最最最重要成功的秘诀就在于可以在ImageNet这样海量的数据上进行pretrain，然后再把学习到的(approximately) general feature 通过finetune transfer到其他任务中去。如果BP都没法做，这个就完全无从谈起了。</p>
+</li>
+<li><p>换句话说，如果这样的Idea能在大数据上work，那么其实相当于否定了BP存在的意义。以后大家都一层一层加就是了嘛。当然这样的好事是不存在的。</p>
+</li>
+<li><p>如何把tree based model可以做到e2e训练，以及拓展开来如何更高效地把更高效的base learner引入神经网络这又是另外一个故事。我们在这方面也做了一些尝试，但是所有的这一切的基础都是可以bp。</p>
+</li>
 </ul>
+<ol>
+<li><p><strong>Method：</strong>这里使用了一个stacking random forest的方法来实现上述idea。从创新性上而言，在<strong>Kaggle</strong>比赛中不同种类模型之间的Stacking和Concatenation早就不是什么新想法。所以从实现层面上而言，仍旧乏善可陈。而且中间层只是把最终分类的结果concat在一起，都不是把每个tree生成的leaf对应的feature。个人觉得这样会严重影响stack的性能，好歹之前FB还是把GBDT的每个leaf当成一个feature才去train的logisitic regression。</p>
+</li>
+<li><p><strong>Experiment：</strong>这是本文槽点最多的部分。看到还在跑MNIST和ORL就知道这完全是做ML人的玩具。不熟悉别的应用，单就Vision而言，这个结果比ELM其实还没说服力，而且我相信会有更简单的模型同样可以达到类似的结果。比如随便开开脑洞train个SVM中间加个non-linear transformation什么的。现在在CVPR大家都知道Cifar都不能算是有信服力的数据集，更何况MNIST和ORL这种。</p>
+</li>
+</ol>
+<p>另外，比较的网络结构也都是拍拍脑袋想出来的，唯一比了一个经典结构LeNet5还没比过。不过基于上述第一点的看法，我完全不相信这样的算法能在稍微大一些的数据集上取得还不错的结果。另外我觉得非常不合适的claim：</p>
+<ol>
+<li><p>Table1中画了很多问号，显得CNN要调整的参数有非常多。然而实际上，绝大部分参数都是有默认的设置的。剩下的参数也可以快速通过简单的试错得到一个还不错的初始值。对于这个问题，我的观点一直是每天在抱怨CNN调参困难，在用grid search的人，其实还没理解CNN。</p>
+</li>
+<li><p>作者不停在claim说gcForest在小数据好，无需调参。然而这只是在不停强调一个low capacity model的好处，这个事情的另外一面在于low capacity model会很快饱和，喂进去再多数据也不会有性能增长。更进一步说，我丝毫不会奇怪tree based model在同等参数条件下比nn based model结果好。因为tree based model就是可以更好地利用参数，然而上限也很快会到来。最后给大家罗列几个非常相似的idea和claim，最后都无法在大数据上取得令人信服结果的工作：</p>
+</li>
+</ol>
+<ul>
+<li><p>DSN：邓力老师的工作。基本完全一样的idea，除了是用NN不是forest。</p>
+</li>
+<li><p>ELM：这么多年了，仍然没有拿得出手的让人信服的结果。。。</p>
+</li>
+<li><p>PCANet：好在作者自己就认识到这是一个baseline的工作，尝试过大数据，并不work。</p>
+</li>
+<li><p>SARM：去年炒的沸沸扬扬的NIPS撤稿了的工作。其实单从方法本身来讲着paper并没啥太大问题。但是请大家注意，这个工作当初引起了诸多大牛的注意就是因为paper实验中讲在ImageNet上做出来很好的结果。不过最终也是证明是由于实验错误导致的。</p>
+</li>
+</ul>
+<p>这里有一个三年前做的<a href="http://winsty.net/talks/nonNN.pptx" target="_blank" rel="external">survey</a>。综上，这个paper作为一个junior PhD练手的工作还好，但是要谈多大影响力实在差的还远。历史总是在重复上演，这个idea是属于那种如果有实习生来跟我讲这样一个idea，我绝对不会同意去做的工作。最后吐槽，一个paper的影响力长期来看是会均值回归的，不会因为某个媒体或者某个人爆炒一波成就一个经典工作。希望在这个浮躁的年代，每个人尤其是研究者保持独立思考，不要人云亦云。不忘初心，方得始终。</p>
+<p>作者：<a href="https://www.zhihu.com/question/56474891/answer/149549752" target="_blank" rel="external">Naiyan Wang</a></p>
 
       
     </div>
@@ -413,12 +440,6 @@ Assignment">
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Course-Introduction/" rel="tag"># Course Introduction</a>
-          
-        </div>
-      
 
       
         
@@ -428,8 +449,8 @@ Assignment">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/19/Stay-Hungry-Stay-Foolish-Be-Lazy/" rel="next" title="Stay-Hungry-Stay-Foolish-Be-Lazy">
-                <i class="fa fa-chevron-left"></i> Stay-Hungry-Stay-Foolish-Be-Lazy
+              <a href="/2017/03/04/Clustering-Again/" rel="next" title="Clustering Again">
+                <i class="fa fa-chevron-left"></i> Clustering Again
               </a>
             
 			
@@ -440,8 +461,8 @@ Assignment">
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/02/27/L2-Image-Classification-k-Nearest-Neighbor/" rel="prev" title="L2_Image_Classification_k-Nearest_Neighbor">
-                L2_Image_Classification_k-Nearest_Neighbor <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/04/Tallk-about-Caffe-Layers/" rel="prev" title="Tallk about Caffe Layers">
+                Tallk about Caffe Layers <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -457,10 +478,10 @@ Assignment">
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2017/02/26/L1-Overview-of-the-Course/"
-     data-title="L1-Overview-of-the-Course"
+        <div class="ds-share flat" data-thread-key="2017/03/04/What-is-Deep-Forest/"
+     data-title="What is Deep Forest"
      data-content=""
-     data-url="http://verdin.cn/2017/02/26/L1-Overview-of-the-Course/">
+     data-url="http://verdin.cn/2017/03/04/What-is-Deep-Forest/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
