@@ -803,7 +803,8 @@
       
         
           
-            <p>依然是介绍Alex和Alessandro于2014年发表在的Science上的一篇关于聚类的文章 <a href="http://science.sciencemag.org/content/344/6191/1492" target="_blank" rel="external">Clustering by fast search and find of density peak</a>s，该文章的基本思想很简单，但是其聚类效果却兼具了谱聚类(Spectral Clustering)[<a href="http://www.cs.cornell.edu/courses/cs6780/2010fa/materials/nips01-spectral.pdf" target="_blank" rel="external">On spectral clustering: Analysis and an algorithm</a>, <a href="https://www.cs.cmu.edu/~aarti/Class/10701/slides/Lecture21_2.pdf" target="_blank" rel="external">Spectral clustering</a>, <a href="http://www.cis.rit.edu/~cnspci/references/luxburg2007.pdf" target="_blank" rel="external">A tutorial on spectral clustering</a>]和K-Means的特点，着实激起了极大的兴趣，该聚类算法主要是基于两个基本点：</p>
+            <h1 id="Mean-Shift-Clustering"><a href="#Mean-Shift-Clustering" class="headerlink" title="Mean-Shift-Clustering"></a>Mean-Shift-Clustering</h1><p><a href="http://efavdb.com/mean-shift/" target="_blank" rel="external">1</a><br><a href="https://en.wikipedia.org/wiki/Mean_shift" target="_blank" rel="external">2</a><br><a href="https://github.com/mattnedrich/MeanShift_py" target="_blank" rel="external">3</a></p>
+<p>依然是介绍Alex和Alessandro于2014年发表在的Science上的一篇关于聚类的文章 <a href="http://science.sciencemag.org/content/344/6191/1492" target="_blank" rel="external">Clustering by fast search and find of density peak</a>s，该文章的基本思想很简单，但是其聚类效果却兼具了谱聚类(Spectral Clustering)[<a href="http://www.cs.cornell.edu/courses/cs6780/2010fa/materials/nips01-spectral.pdf" target="_blank" rel="external">On spectral clustering: Analysis and an algorithm</a>, <a href="https://www.cs.cmu.edu/~aarti/Class/10701/slides/Lecture21_2.pdf" target="_blank" rel="external">Spectral clustering</a>, <a href="http://www.cis.rit.edu/~cnspci/references/luxburg2007.pdf" target="_blank" rel="external">A tutorial on spectral clustering</a>]和K-Means的特点，着实激起了极大的兴趣，该聚类算法主要是基于两个基本点：</p>
 <ol>
 <li>聚类中心的密度高于其临近的样本点的密度</li>
 <li>聚类中心与比其密度还高的聚类中心的距离相对较大</li>
@@ -928,7 +929,11 @@ regionQuery(P, eps)
 </code></pre><p>此外，作者声称根据随机均匀分布生成的数据对应的γ服从幂律分布(Power laws)，但是真正具备聚类中心的数据集是不存在这种情况的。很多现象其实都是近似服从幂律分布的，尤其适用于大多数事件的规模很小但少数事件规模很大的场合，不过作者在此并未给出该定论的出处，所以同样这一点遭到了很多读者的质疑。我猜目前只是作者根据一些实验数归纳出来的，只能说是靠不完全统计得到的经验，没有实质性的理论依据。也就是γ≈cr−k+ϵ，其中r为γ的排名序号，那么log⁡γ和log⁡r之间应该近似呈现线性关系，如图9(b)所示。如果作者的猜测正确的话，我们不妨在聚类前汇出如log⁡γ和log⁡r的关系图，借此判断聚类的复杂性，或者说在该数据集上进行聚类的结果可靠性如何。</p>
 <center><img src="/2017/03/04/Clustering-Again/2017-0304-010.png" alt="l2_1"></center>
 
-
+<p>注：代码有两处需要更改：</p>
+<ol>
+<li>计算radius时Num换成Num*(Num-1)；</li>
+<li>求聚类个数时，求几个聚类中心点（N个值的前k个），有句code应该在for循环外。</li>
+</ol>
 
           
         
@@ -1592,7 +1597,7 @@ while True:
 </ul>
 <p><em>预告：卷积神经网络映射图像像素值到分类分值的方法和上面一样，但是映射(f)就要复杂多了，其包含的参数也更多。</em></p>
 <h2 id="理解线性分类器"><a href="#理解线性分类器" class="headerlink" title="理解线性分类器"></a>理解线性分类器</h2><p>线性分类器计算图像中3个颜色通道中所有像素的值与权重的矩阵乘，从而得到分类分值。根据我们对权重设置的值，对于图像中的某些位置的某些颜色，函数表现出喜好或者厌恶（根据每个权重的符号而定）。举个例子，可以想象“船”分类就是被大量的蓝色所包围（对应的就是水）。那么“船”分类器在蓝色通道上的权重就有很多的正权重（它们的出现提高了“船”分类的分值），而在绿色和红色通道上的权重为负的就比较多（它们的出现降低了“船”分类的分值）。</p>
-<center><img src="/2017/03/01/Linear-Classification/2017-03-01-003.JPG" alt="l2_2"></center>
+<center><img src="/2017/03/01/Linear-Classification/2017-03-01-003.jpg" alt="l2_2"></center>
 
 <p>一个将图像映射到分类分值的例子。为了便于可视化，假设图像只有4个像素（都是黑白像素，这里不考虑RGB通道），有3个分类（红色代表猫，绿色代表狗，蓝色代表船，注意，这里的红、绿和蓝3种颜色仅代表分类，和RGB通道没有关系）。首先将图像像素拉伸为一个列向量，与W进行矩阵乘，然后得到各个分类的分值。需要注意的是，这个W一点也不好：猫分类的分值非常低。从上图来看，算法倒是觉得这个图像是一只狗。</p>
 <hr>
@@ -1974,11 +1979,10 @@ def L(X, y, W):
       
         
           
-            <h1 id="如诗如画"><a href="#如诗如画" class="headerlink" title="如诗如画"></a>如诗如画</h1><hr>
-<center><img src="/2017/02/28/A-beautiful-picture/2017-02-28-001.JPG" alt="2017-02-28-001"></center>
-
-<hr>
-
+            <h1 id="Just-like-a-Picture"><a href="#Just-like-a-Picture" class="headerlink" title="Just like a Picture"></a>Just like a Picture</h1><hr>
+<p><center><br><img src="/2017/02/28/A-beautiful-picture/2017-02-28-001.JPG" width="25%" height="25%"></center></p>
+<p>如诗如画</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2>
           
         
       
