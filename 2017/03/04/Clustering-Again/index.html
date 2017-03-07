@@ -87,14 +87,20 @@
 
 
 
-<meta name="description" content="Mean-Shift-Clustering123
-依然是介绍Alex和Alessandro于2014年发表在的Science上的一篇关于聚类的文章 Clustering by fast search and find of density peaks，该文章的基本思想很简单，但是其聚类效果却兼具了谱聚类(Spectral Clustering)[On spectral clustering: An">
+<meta name="description" content="Mean-Shift-Clustering1 ：The mean shift clustering algorithm
+2 ：Wiki
+3  ：python_code
+Comment on “Clustering by fast search and find of density peaks”
+依然是介绍Alex和Alessandro于2014年发表在的Science上的一篇关于聚类的文章 Cl">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Clustering Again">
 <meta property="og:url" content="http://verdin.cn/2017/03/04/Clustering-Again/index.html">
 <meta property="og:site_name" content="Verdin小站">
-<meta property="og:description" content="Mean-Shift-Clustering123
-依然是介绍Alex和Alessandro于2014年发表在的Science上的一篇关于聚类的文章 Clustering by fast search and find of density peaks，该文章的基本思想很简单，但是其聚类效果却兼具了谱聚类(Spectral Clustering)[On spectral clustering: An">
+<meta property="og:description" content="Mean-Shift-Clustering1 ：The mean shift clustering algorithm
+2 ：Wiki
+3  ：python_code
+Comment on “Clustering by fast search and find of density peaks”
+依然是介绍Alex和Alessandro于2014年发表在的Science上的一篇关于聚类的文章 Cl">
 <meta property="og:image" content="http://verdin.cn/2017/03/04/Clustering-Again/2017-0304-001.png">
 <meta property="og:image" content="http://verdin.cn/2017/03/04/Clustering-Again/2017-0304-002.png">
 <meta property="og:image" content="http://verdin.cn/2017/03/04/Clustering-Again/2017-0304-003.png">
@@ -103,11 +109,14 @@
 <meta property="og:image" content="http://verdin.cn/2017/03/04/Clustering-Again/2017-0304-008.png">
 <meta property="og:image" content="http://verdin.cn/2017/03/04/Clustering-Again/2017-0304-009.png">
 <meta property="og:image" content="http://verdin.cn/2017/03/04/Clustering-Again/2017-0304-010.png">
-<meta property="og:updated_time" content="2017-03-04T16:16:26.360Z">
+<meta property="og:updated_time" content="2017-03-06T15:09:36.737Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Clustering Again">
-<meta name="twitter:description" content="Mean-Shift-Clustering123
-依然是介绍Alex和Alessandro于2014年发表在的Science上的一篇关于聚类的文章 Clustering by fast search and find of density peaks，该文章的基本思想很简单，但是其聚类效果却兼具了谱聚类(Spectral Clustering)[On spectral clustering: An">
+<meta name="twitter:description" content="Mean-Shift-Clustering1 ：The mean shift clustering algorithm
+2 ：Wiki
+3  ：python_code
+Comment on “Clustering by fast search and find of density peaks”
+依然是介绍Alex和Alessandro于2014年发表在的Science上的一篇关于聚类的文章 Cl">
 <meta name="twitter:image" content="http://verdin.cn/2017/03/04/Clustering-Again/2017-0304-001.png">
 
 
@@ -376,8 +385,11 @@
       
 
       
-        <h1 id="Mean-Shift-Clustering"><a href="#Mean-Shift-Clustering" class="headerlink" title="Mean-Shift-Clustering"></a>Mean-Shift-Clustering</h1><p><a href="http://efavdb.com/mean-shift/" target="_blank" rel="external">1</a><br><a href="https://en.wikipedia.org/wiki/Mean_shift" target="_blank" rel="external">2</a><br><a href="https://github.com/mattnedrich/MeanShift_py" target="_blank" rel="external">3</a></p>
-<p>依然是介绍Alex和Alessandro于2014年发表在的Science上的一篇关于聚类的文章 <a href="http://science.sciencemag.org/content/344/6191/1492" target="_blank" rel="external">Clustering by fast search and find of density peak</a>s，该文章的基本思想很简单，但是其聚类效果却兼具了谱聚类(Spectral Clustering)[<a href="http://www.cs.cornell.edu/courses/cs6780/2010fa/materials/nips01-spectral.pdf" target="_blank" rel="external">On spectral clustering: Analysis and an algorithm</a>, <a href="https://www.cs.cmu.edu/~aarti/Class/10701/slides/Lecture21_2.pdf" target="_blank" rel="external">Spectral clustering</a>, <a href="http://www.cis.rit.edu/~cnspci/references/luxburg2007.pdf" target="_blank" rel="external">A tutorial on spectral clustering</a>]和K-Means的特点，着实激起了极大的兴趣，该聚类算法主要是基于两个基本点：</p>
+        <h1 id="Mean-Shift-Clustering"><a href="#Mean-Shift-Clustering" class="headerlink" title="Mean-Shift-Clustering"></a>Mean-Shift-Clustering</h1><p><a href="http://efavdb.com/mean-shift/" target="_blank" rel="external">1</a> ：The mean shift clustering algorithm</p>
+<p><a href="https://en.wikipedia.org/wiki/Mean_shift" target="_blank" rel="external">2</a> ：Wiki</p>
+<p><a href="https://github.com/mattnedrich/MeanShift_py" target="_blank" rel="external">3</a>  ：python_code</p>
+<p><a href="https://www.researchgate.net/publication/271218863_Comment_on_Clustering_by_fast_search_and_find_of_density_peaks" target="_blank" rel="external">Comment on “Clustering by fast search and find of density peaks”</a></p>
+<p>依然是介绍Alex和Alessandro于2014年发表在的Science上的一篇关于聚类的文章 <a href="http://science.sciencemag.org/content/344/6191/1492" target="_blank" rel="external">Clustering by fast search and find of density peaks</a>，该文章的基本思想很简单，但是其聚类效果却兼具了谱聚类(Spectral Clustering)[<a href="http://www.cs.cornell.edu/courses/cs6780/2010fa/materials/nips01-spectral.pdf" target="_blank" rel="external">On spectral clustering: Analysis and an algorithm</a>, <a href="https://www.cs.cmu.edu/~aarti/Class/10701/slides/Lecture21_2.pdf" target="_blank" rel="external">Spectral clustering</a>, <a href="http://www.cis.rit.edu/~cnspci/references/luxburg2007.pdf" target="_blank" rel="external">A tutorial on spectral clustering</a>]和K-Means的特点，着实激起了极大的兴趣，该聚类算法主要是基于两个基本点：</p>
 <ol>
 <li>聚类中心的密度高于其临近的样本点的密度</li>
 <li>聚类中心与比其密度还高的聚类中心的距离相对较大</li>
@@ -663,7 +675,7 @@ var duoshuoQuery = {short_name:"verdin"};
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -674,7 +686,7 @@ var duoshuoQuery = {short_name:"verdin"};
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

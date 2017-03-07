@@ -1,0 +1,913 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ROI Pooling," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="ROI Pooling的意义ROIs Pooling顾名思义，是pooling层的一种，而且是针对ROIs的pooling；
+什么是ROI呢？
+ROI是Region of interest的简写，指的是faster rcnn结构中，经过rpn层后，产生的proposal对应的box框。
+所以ROI就是指矩形框，往往经过rpn后输出的不止一个矩形框，所以这里我们是对多个ROI进行Pooling。
+R">
+<meta property="og:type" content="article">
+<meta property="og:title" content="I like ROILayer">
+<meta property="og:url" content="http://verdin.cn/2017/03/06/I-like-ROILayer/index.html">
+<meta property="og:site_name" content="Verdin小站">
+<meta property="og:description" content="ROI Pooling的意义ROIs Pooling顾名思义，是pooling层的一种，而且是针对ROIs的pooling；
+什么是ROI呢？
+ROI是Region of interest的简写，指的是faster rcnn结构中，经过rpn层后，产生的proposal对应的box框。
+所以ROI就是指矩形框，往往经过rpn后输出的不止一个矩形框，所以这里我们是对多个ROI进行Pooling。
+R">
+<meta property="og:image" content="http://verdin.cn/2017/03/06/I-like-ROILayer/2017-0307-001.jpg">
+<meta property="og:updated_time" content="2017-03-07T15:43:00.750Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="I like ROILayer">
+<meta name="twitter:description" content="ROI Pooling的意义ROIs Pooling顾名思义，是pooling层的一种，而且是针对ROIs的pooling；
+什么是ROI呢？
+ROI是Region of interest的简写，指的是faster rcnn结构中，经过rpn层后，产生的proposal对应的box框。
+所以ROI就是指矩形框，往往经过rpn后输出的不止一个矩形框，所以这里我们是对多个ROI进行Pooling。
+R">
+<meta name="twitter:image" content="http://verdin.cn/2017/03/06/I-like-ROILayer/2017-0307-001.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://verdin.cn/2017/03/06/I-like-ROILayer/"/>
+
+
+
+
+
+  <title> I like ROILayer | Verdin小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?de255985a34f4b5d76b6cd2f11b8b565";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Verdin小站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://verdin.cn/2017/03/06/I-like-ROILayer/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Verdin">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Verdin小站">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Verdin小站" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                I like ROILayer
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-06T23:50:33+08:00">
+                2017-03-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/06/I-like-ROILayer/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/06/I-like-ROILayer/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="ROI-Pooling的意义"><a href="#ROI-Pooling的意义" class="headerlink" title="ROI Pooling的意义"></a>ROI Pooling的意义</h3><p><strong>ROIs Pooling</strong>顾名思义，是<strong>pooling层</strong>的一种，而且是针对<strong>ROIs</strong>的pooling；</p>
+<p><strong>什么是ROI呢？</strong></p>
+<p>ROI是Region of interest的简写，指的是faster rcnn结构中，经过rpn层后，产生的proposal对应的box框。</p>
+<p>所以ROI就是指矩形框，往往经过rpn后输出的不止一个矩形框，所以这里我们是对<strong>多个ROI进行Pooling</strong>。</p>
+<h3 id="ROI-Pooling的输入"><a href="#ROI-Pooling的输入" class="headerlink" title="ROI Pooling的输入"></a>ROI Pooling的输入</h3><p>输入有两部分组成：</p>
+<ol>
+<li><p><strong>data：</strong>指的是进入RPN层之前的那个<strong>Conv层的Feature Map</strong>，通常我们称之为<strong>“share_conv”</strong>； </p>
+</li>
+<li><p><strong>rois：</strong>指的是<strong>RPN层的输出</strong>，一堆矩形框，形状为1x5x1x1（<strong>4个坐标+索引index</strong>），其中值得注意的是：<strong>坐标的参考系</strong>不是针对feature map这张图的，而是针对原图的（神经网络最开始的输入）。</p>
+</li>
+</ol>
+<h3 id="ROI-Pooling的输出"><a href="#ROI-Pooling的输出" class="headerlink" title="ROI Pooling的输出"></a>ROI Pooling的输出</h3><p>输出是batch个vector，其中batch的值等于roi的个数，vector的大小为channelxwxh；<strong>ROI Pooling的过程</strong>就是将一个个大小不同的box矩形框，都映射成<strong>大小为wxh的矩形框</strong>；</p>
+<center><img src="/2017/03/06/I-like-ROILayer/2017-0307-001.jpg" alt="l2_1"></center>
+
+<ul>
+<li><p>如图所示，我们先把roi中的坐标映射到feature map上，映射规则比较简单，就是把各个坐标除以输入图片与feature map的大小的比值。</p>
+</li>
+<li><p>得到了feature map上的box坐标后，我们使用pooling得到输出；由于输入的图片大小不一，所以这里我们使用的spp pooling，spp pooling在pooling的过程中需要计算pooling后的结果对应的两个像素点反映社到feature map上所占的范围，然后在那个范围中进行取max或者取average。</p>
+</li>
+</ul>
+<h3 id="Caffe-ROI-Pooling的源码解析"><a href="#Caffe-ROI-Pooling的源码解析" class="headerlink" title="Caffe ROI Pooling的源码解析"></a>Caffe ROI Pooling的源码解析</h3><p><strong>输入，b0 为卷积的feature map，b1 为rois。</strong></p>
+<h4 id="1-LayerSetUp"><a href="#1-LayerSetUp" class="headerlink" title="1. LayerSetUp"></a>1. LayerSetUp</h4><p>将参数赋值。</p>
+<pre><code>template &lt;typename Dtype&gt;
+void ROIPoolingLayer&lt;Dtype&gt;::LayerSetUp(const vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,
+      const vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; top) {
+  ROIPoolingParameter roi_pool_param = this-&gt;layer_param_.roi_pooling_param();
+  //经过Pooling后的feature map的高
+  pooled_height_ = roi_pool_param.pooled_h();
+  //经过Pooling后的feature map的宽
+  pooled_width_ = roi_pool_param.pooled_w();
+  //输入图片与feature map之前的比值，这个feature map指roi pooling层的输入
+  spatial_scale_ = roi_pool_param.spatial_scale();
+}
+</code></pre><h4 id="2-Reshape"><a href="#2-Reshape" class="headerlink" title="2. Reshape"></a>2. Reshape</h4><p>将top reshape成num_b1(num of rois) c_b0 pooled_height pooled_width，将max<em>idx</em> reshape与top一样。</p>
+<pre><code>template &lt;typename Dtype&gt;
+void ROIPoolingLayer&lt;Dtype&gt;::Reshape(const vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,
+      const vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; top) {
+  //输入的feature map的channel数
+  channels_ = bottom[0]-&gt;channels();
+  //输入的feature map的高
+  height_ = bottom[0]-&gt;height();
+  //输入的feature map的宽
+  width_ = bottom[0]-&gt;width();
+  //设置输出的形状NCHW，N=ROI的个数，C=channels_，H=pooled_height_，W=pooled_width_
+  top[0]-&gt;Reshape(bottom[1]-&gt;num(), channels_, pooled_height_,
+      pooled_width_);
+  //max_idx_的形状与top一致
+  max_idx_.Reshape(bottom[1]-&gt;num(), channels_, pooled_height_,
+      pooled_width_);
+}
+</code></pre><h4 id="3-Forward"><a href="#3-Forward" class="headerlink" title="3. Forward"></a>3. Forward</h4><p>首先计算rois映射到feature map的坐标，即原始坐标乘spacial-scale(大小为所有stride的乘积分之一)，然后针对每个输出来进行计算，即每个输出点都代表原先的一块区域，这个区域大小为bin_h= roi<em>height / pooled</em> height, bin_w=roi_width / pooled_width.遍历所有top的点所映射回feature map的区域，并找到最大值，记录最大值所在的位置。</p>
+<pre><code>template &lt;typename Dtype&gt;
+void ROIPoolingLayer&lt;Dtype&gt;::Forward_cpu(const vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,
+      const vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; top) {
+  //输入有两部分组成，data和rois
+  const Dtype* bottom_data = bottom[0]-&gt;cpu_data();
+  const Dtype* bottom_rois = bottom[1]-&gt;cpu_data();
+  // Number of ROIs
+  int num_rois = bottom[1]-&gt;num();
+  int batch_size = bottom[0]-&gt;num();
+  int top_count = top[0]-&gt;count();
+  Dtype* top_data = top[0]-&gt;mutable_cpu_data();
+  caffe_set(top_count, Dtype(-FLT_MAX), top_data);
+  int* argmax_data = max_idx_.mutable_cpu_data();
+  caffe_set(top_count, -1, argmax_data);
+
+  // For each ROI R = [batch_index x1 y1 x2 y2]: max pool over R
+  for (int n = 0; n &lt; num_rois; ++n) {
+    int roi_batch_ind = bottom_rois[0];
+    //把原图的坐标映射到feature map上面
+    int roi_start_w = round(bottom_rois[1] * spatial_scale_);
+    int roi_start_h = round(bottom_rois[2] * spatial_scale_);
+    int roi_end_w = round(bottom_rois[3] * spatial_scale_);
+    int roi_end_h = round(bottom_rois[4] * spatial_scale_);
+    //计算每个roi在feature map上面的大小
+    int roi_height = max(roi_end_h - roi_start_h + 1, 1);
+    int roi_width = max(roi_end_w - roi_start_w + 1, 1);
+    //pooling之后的feature map的一个值对应于pooling之前的feature map上的大小
+    //注：由于roi的大小不一致，所以每次都需要计算一次
+    const Dtype bin_size_h = static_cast&lt;Dtype&gt;(roi_height)
+                             / static_cast&lt;Dtype&gt;(pooled_height_);
+    const Dtype bin_size_w = static_cast&lt;Dtype&gt;(roi_width)
+                             / static_cast&lt;Dtype&gt;(pooled_width_);
+    //找到对应的roi的feature map，如果input data的batch size为1
+    //那么roi_batch_ind=0
+    const Dtype* batch_data = bottom_data + bottom[0]-&gt;offset(roi_batch_ind);
+    //pooling的过程是针对每一个channel的，所以需要循环遍历
+    for (int c = 0; c &lt; channels_; ++c) {
+      //计算output的每一个值，所以需要遍历一遍output，然后求出所有值
+      for (int ph = 0; ph &lt; pooled_height_; ++ph) {
+        for (int pw = 0; pw &lt; pooled_width_; ++pw) {
+          // Compute pooling region for this output unit:
+          //  start (included) = floor(ph * roi_height / pooled_height_)
+          //  end (excluded) = ceil((ph + 1) * roi_height / pooled_height_)
+          // 计算output上的一点对应于input上面区域的大小[hstart, wstart, hend, wend]
+          int hstart = static_cast&lt;int&gt;(floor(static_cast&lt;Dtype&gt;(ph)
+                                              * bin_size_h));
+          int hend = static_cast&lt;int&gt;(ceil(static_cast&lt;Dtype&gt;(ph + 1)
+                                           * bin_size_h));
+          int wstart = static_cast&lt;int&gt;(floor(static_cast&lt;Dtype&gt;(pw)
+                                              * bin_size_w));
+          int wend = static_cast&lt;int&gt;(ceil(static_cast&lt;Dtype&gt;(pw + 1)
+                                           * bin_size_w));
+          //将映射后的区域平动到对应的位置[hstart, wstart, hend, wend]
+          hstart = min(max(hstart + roi_start_h, 0), height_);
+          hend = min(max(hend + roi_start_h, 0), height_);
+          wstart = min(max(wstart + roi_start_w, 0), width_);
+          wend = min(max(wend + roi_start_w, 0), width_);
+          //如果映射后的矩形框不符合
+          bool is_empty = (hend &lt;= hstart) || (wend &lt;= wstart);
+          //pool_index指的是此时计算的output的值对应于output的位置
+          const int pool_index = ph * pooled_width_ + pw;
+          //如果矩形不符合，此处output的值设为0，此处的对应于输入区域的最大值为-1
+          if (is_empty) {
+            top_data[pool_index] = 0;
+            argmax_data[pool_index] = -1;
+          }
+          //遍历output的值对应于input的区域块
+          for (int h = hstart; h &lt; hend; ++h) {
+            for (int w = wstart; w &lt; wend; ++w) {
+             // 对应于input上的位置
+              const int index = h * width_ + w;
+              //计算区域块的最大值，保存在output对应的位置上
+              //同时记录最大值的索引
+              if (batch_data[index] &gt; top_data[pool_index]) {
+                top_data[pool_index] = batch_data[index];
+                argmax_data[pool_index] = index;
+              }
+            }
+          }
+        }
+      }
+      // Increment all data pointers by one channel
+      batch_data += bottom[0]-&gt;offset(0, 1);
+      top_data += top[0]-&gt;offset(0, 1);
+      argmax_data += max_idx_.offset(0, 1);
+    }
+    // Increment ROI data pointer
+    bottom_rois += bottom[1]-&gt;offset(1);
+  }
+}
+</code></pre><h4 id="4-Backward"><a href="#4-Backward" class="headerlink" title="4. Backward"></a>4. Backward</h4><p>backward直接写成gpu的形式，不过开头可以看出是遍历feature map并记录n, c, h, w，为之后记录bottom_diff做准备，然后计算每个roi映射到feature map的坐标，接下来我就认为有个小问题了，作者的意思是表达如果h，w如果不在roi区域内的话，可以直接continue了，这点不难理解，某个点在roi中可能对这个roi所对应的top产生贡献（在某个bin中为最大），如果点不在那个区域中，一定不会对top产生贡献。而某一点可能对多个区域产生贡献，故loss返回来时，同一点的loss累加。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ROI-Pooling/" rel="tag"># ROI Pooling</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/06/Why-Gradient-Descent-is-so-Amazing/" rel="next" title="Why Gradient Descent is so Amazing">
+                <i class="fa fa-chevron-left"></i> Why Gradient Descent is so Amazing
+              </a>
+            
+			
+			
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/07/Batch-Normalization/" rel="prev" title="Batch Normalization">
+                Batch Normalization <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/03/06/I-like-ROILayer/"
+     data-title="I like ROILayer"
+     data-content=""
+     data-url="http://verdin.cn/2017/03/06/I-like-ROILayer/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+<section id="comment">  
+  <!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="<%- page.path %>" data-title="<%- page.title %>" data-url="<%- page.permalink %>"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"verdin"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</section>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Verdin" />
+          <p class="site-author-name" itemprop="name">Verdin</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ROI-Pooling的意义"><span class="nav-number">1.</span> <span class="nav-text">ROI Pooling的意义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ROI-Pooling的输入"><span class="nav-number">2.</span> <span class="nav-text">ROI Pooling的输入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ROI-Pooling的输出"><span class="nav-number">3.</span> <span class="nav-text">ROI Pooling的输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Caffe-ROI-Pooling的源码解析"><span class="nav-number">4.</span> <span class="nav-text">Caffe ROI Pooling的源码解析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-LayerSetUp"><span class="nav-number">4.1.</span> <span class="nav-text">1. LayerSetUp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Reshape"><span class="nav-number">4.2.</span> <span class="nav-text">2. Reshape</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Forward"><span class="nav-number">4.3.</span> <span class="nav-text">3. Forward</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Backward"><span class="nav-number">4.4.</span> <span class="nav-text">4. Backward</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Verdin</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+<span id="busuanzi_container_site_pv">
+  . . . . . . . . . 访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+<span id="busuanzi_container_site_uv">
+  _______~欢迎第<span id="busuanzi_value_site_uv"></span>位访客~
+</span>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"verdin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

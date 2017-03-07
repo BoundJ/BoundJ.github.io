@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="目标检测," />
 
 
 
@@ -87,13 +87,63 @@
 
 
 
+<meta name="description" content="1. 计算机视觉任务
+
+2. 传统目标检测方法传统目标检测流程：
+1）区域选择（穷举策略：采用滑动窗口，且设置不同的大小，不同的长宽比对图像进行遍历，时间复杂度高）
+2）特征提取（SIFT、HOG等；形态多样性、光照变化多样性、背景多样性使得特征鲁棒性差）
+3）分类器（主要有SVM、Adaboost等）
+传统目标检测的主要问题：
+1）基于滑动窗口的区域选择策略没有针对性，时间复杂度高，窗口冗余
+2">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Why FasterRCNN !">
 <meta property="og:url" content="http://verdin.cn/2017/03/04/Why-FasterRCNN/index.html">
 <meta property="og:site_name" content="Verdin小站">
-<meta property="og:updated_time" content="2017-03-04T14:16:33.713Z">
+<meta property="og:description" content="1. 计算机视觉任务
+
+2. 传统目标检测方法传统目标检测流程：
+1）区域选择（穷举策略：采用滑动窗口，且设置不同的大小，不同的长宽比对图像进行遍历，时间复杂度高）
+2）特征提取（SIFT、HOG等；形态多样性、光照变化多样性、背景多样性使得特征鲁棒性差）
+3）分类器（主要有SVM、Adaboost等）
+传统目标检测的主要问题：
+1）基于滑动窗口的区域选择策略没有针对性，时间复杂度高，窗口冗余
+2">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Why-FasterRCNN/2017-0307-001.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Why-FasterRCNN/2017-0307-002.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Why-FasterRCNN/2017-0307-003.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Why-FasterRCNN/2017-0307-004.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Why-FasterRCNN/2017-0307-005.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Why-FasterRCNN/2017-0307-006.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Why-FasterRCNN/2017-0307-008.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Why-FasterRCNN/2017-0307-009.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Why-FasterRCNN/2017-0307-010.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Why-FasterRCNN/2017-0307-011.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Why-FasterRCNN/2017-0307-012.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Why-FasterRCNN/2017-0307-013.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Why-FasterRCNN/2017-0307-014.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Why-FasterRCNN/2017-0307-015.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Why-FasterRCNN/2017-0307-016.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Why-FasterRCNN/2017-0306-001.jpg">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Why-FasterRCNN/2017-0306-002.jpg">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Why-FasterRCNN/2017-0306-003.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Why-FasterRCNN/2017-0306-005.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Why-FasterRCNN/2017-0306-006.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Why-FasterRCNN/2017-0306-007.png">
+<meta property="og:image" content="http://verdin.cn/2017/03/04/Why-FasterRCNN/2017-0306-008.png">
+<meta property="og:updated_time" content="2017-03-07T15:36:55.026Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Why FasterRCNN !">
+<meta name="twitter:description" content="1. 计算机视觉任务
+
+2. 传统目标检测方法传统目标检测流程：
+1）区域选择（穷举策略：采用滑动窗口，且设置不同的大小，不同的长宽比对图像进行遍历，时间复杂度高）
+2）特征提取（SIFT、HOG等；形态多样性、光照变化多样性、背景多样性使得特征鲁棒性差）
+3）分类器（主要有SVM、Adaboost等）
+传统目标检测的主要问题：
+1）基于滑动窗口的区域选择策略没有针对性，时间复杂度高，窗口冗余
+2">
+<meta name="twitter:image" content="http://verdin.cn/2017/03/04/Why-FasterRCNN/2017-0307-001.png">
 
 
 
@@ -361,7 +411,216 @@
       
 
       
-        
+        <h1 id="1-计算机视觉任务"><a href="#1-计算机视觉任务" class="headerlink" title="1. 计算机视觉任务"></a>1. 计算机视觉任务</h1><center><img src="/2017/03/04/Why-FasterRCNN/2017-0307-001.png" alt="l2_1"></center>
+
+<h1 id="2-传统目标检测方法"><a href="#2-传统目标检测方法" class="headerlink" title="2. 传统目标检测方法"></a>2. 传统目标检测方法</h1><p><strong>传统目标检测流程：</strong></p>
+<p>1）区域选择（穷举策略：采用滑动窗口，且设置不同的大小，不同的长宽比对图像进行遍历，时间复杂度高）</p>
+<p>2）特征提取（SIFT、HOG等；形态多样性、光照变化多样性、背景多样性使得特征鲁棒性差）</p>
+<p>3）分类器（主要有SVM、Adaboost等）</p>
+<p><strong>传统目标检测的主要问题：</strong></p>
+<p>1）基于滑动窗口的区域选择策略没有针对性，时间复杂度高，窗口冗余</p>
+<p>2）手工设计的特征对于多样性的变化没有很好的鲁棒性</p>
+<h1 id="3-基于侯选区域-Region-Proposal-的深度学习目标检测"><a href="#3-基于侯选区域-Region-Proposal-的深度学习目标检测" class="headerlink" title="3. 基于侯选区域(Region Proposal)的深度学习目标检测"></a>3. 基于侯选区域(Region Proposal)的深度学习目标检测</h1><h2 id="R-CNN-CVPR2014-TPAMI2015"><a href="#R-CNN-CVPR2014-TPAMI2015" class="headerlink" title="R-CNN (CVPR2014, TPAMI2015)"></a>R-CNN (CVPR2014, TPAMI2015)</h2><p>1）<strong>Region Proposal：</strong>可以解决滑动窗口的问题</p>
+<p> 候选区域（Region Proposal）：是预先找出图中目标可能出现的位置。它利用了图像中的<strong>纹理、边缘、颜色</strong>等信息，可以保证在选取较少窗口(几千甚至几百）的情况下保持<strong>较高的召回率</strong>（Recall）。</p>
+<p> 常用的Region Proposal有(详见”<a href="https://arxiv.org/abs/1502.05082" target="_blank" rel="external">What makes for effective detection proposals?</a>“)：</p>
+<ul>
+<li><p><strong>Selective Search</strong></p>
+</li>
+<li><p><strong>Edge Boxes</strong> </p>
+</li>
+</ul>
+<p>2）<strong>R-CNN：</strong>可以解决特征鲁棒性的问题</p>
+<center><img src="/2017/03/04/Why-FasterRCNN/2017-0307-002.png" alt="l2_1"></center>
+
+<p> (1) 输入测试图像</p>
+<p> (2) 利用selective search算法在图像中从下到上提取2000个左右的Region Proposal</p>
+<p> (3) 将每个Region Proposal缩放（warp）成227x227的大小并输入到CNN，将CNN的fc7层的输出作为特征</p>
+<p> (4) 将每个Region Proposal提取到的CNN特征输入到SVM进行分类</p>
+<p> 注：1）对每个Region Proposal缩放到同一尺度是因为CNN全连接层输入需要保证维度固定。</p>
+<p> 2）上图少画了一个过程——对于SVM分好类的Region Proposal做边框回归（bounding-box regression)，边框回归是对region proposal进行纠正的线性回归算法，为了让region proposal提取到的窗口跟目标真实窗口更吻合。因为region proposal提取到的窗口不可能跟人手工标记那么准，如果region proposal跟目标位置偏移较大，即便是分类正确了，但是由于IoU(region proposal与Ground Truth的窗口的交集比并集的比值)低于0.5，那么相当于目标还是没有检测到。</p>
+<p>3）<strong>R-CNN缺点：</strong></p>
+<p> (1) 训练分为多个阶段，步骤繁琐: 微调网络+训练SVM+训练边框回归器</p>
+<p> (2) 训练耗时，占用磁盘空间大：5000张图像产生几百G的特征文件</p>
+<p> (3) 速度慢: 使用GPU, VGG16模型处理一张图像需要47s。</p>
+<p> (4) 测试速度慢：每个候选区域需要运行整个前向CNN计算</p>
+<p> (5) SVM和回归是事后操作：在SVM和回归过程中CNN特征没有被学习更新</p>
+<p> 针对速度慢的这个问题，SPP-NET给出了很好的解决方案。</p>
+<h2 id="SPP-NET-ECCV2014-TPAMI2015"><a href="#SPP-NET-ECCV2014-TPAMI2015" class="headerlink" title="SPP-NET (ECCV2014, TPAMI2015)"></a>SPP-NET (ECCV2014, TPAMI2015)</h2><p><strong>SSP-Net：</strong>Spatial Pyramid Pooling in Deep Convolutional Networks for Visual Recognition</p>
+<p> 先看一下R-CNN为什么检测速度这么慢，一张图都需要47s！仔细看下R-CNN框架发现，对图像提完Region Proposal（2000个左右）之后将每个Proposal当成一张图像进行后续处理(CNN提特征+SVM分类)，实际上对一张图像进行了2000次提特征和分类的过程！这2000个Region Proposal不都是图像的一部分吗，那么我们完全可以对图像提一次卷积层特征，然后只需要将Region Proposal在原图的位置映射到卷积层特征图上，这样对于一张图像我们只需要提一次卷积层特征，然后将每个Region Proposal的卷积层特征输入到全连接层做后续操作。（对于CNN来说，大部分运算都耗在卷积操作上，这样做可以节省大量时间）。</p>
+<p> 现在的问题是每个Region Proposal的尺度不一样，直接这样输入全连接层肯定是不行的，因为全连接层输入必须是固定的长度。SPP-NET恰好可以解决这个问题。</p>
+<center><img src="/2017/03/04/Why-FasterRCNN/2017-0307-003.png" alt="l2_1"></center>
+
+<p>由于传统的CNN限制了输入必须固定大小（比如AlexNet是224x224），所以在实际使用中往往需要对原图片进行crop或者warp的操作：</p>
+<ul>
+<li>crop：截取原图片的一个固定大小的patch</li>
+<li>warp：将原图片的ROI缩放到一个固定大小的patch</li>
+</ul>
+<p>无论是crop还是warp，都无法保证在不失真的情况下将图片传入到CNN当中：</p>
+<ul>
+<li>crop：物体可能会产生截断，尤其是长宽比大的图片。</li>
+<li>warp：物体被拉伸，失去“原形”，尤其是长宽比大的图片</li>
+</ul>
+<p>SPP为的就是解决上述的问题，做到的效果为：不管输入的图片是什么尺度，都能够正确的传入网络。</p>
+<p><strong>具体思路</strong>为：CNN的卷积层是可以处理任意尺度的输入的，只是在全连接层处有限制尺度。换句话说，如果找到一个方法，在全连接层之前将其输入限制到等长，那么就解决了这个问题。</p>
+<p>具体方案如下图所示：</p>
+<center><img src="/2017/03/04/Why-FasterRCNN/2017-0307-004.png" alt="l2_1"></center>
+
+<p> 如果原图输入是224x224，对于conv5出来后的输出，是13x13x256的，可以理解成有256个这样的filter，每个filter对应一张13x13的activation map。如果像上图那样将activation map pooling成4x4 2x2 1x1三张子图，做max pooling后，出来的特征就是固定长度的(16+4+1)x256那么多的维度了。如果原图的输入不是224x224，出来的特征依然是(16+4+1)x256；直觉地说，可以理解成将原来固定大小为(3x3)窗口的pool5改成了自适应窗口大小，窗口的大小和activation map成比例，保证了经过pooling后出来的feature的长度是一致的。</p>
+<hr>
+<p>使用SPP-NET相比于R-CNN可以大大加快目标检测的速度，但是依然存在着很多问题：</p>
+<p>(1) 训练分为多个阶段，步骤繁琐: 微调网络+训练SVM+训练训练边框回归器</p>
+<p>(2) SPP-NET在微调网络的时候固定了卷积层，只对全连接层进行微调，而对于一个新的任务，有必要对卷积层也进行微调。（分类的模型提取的特征更注重高层语义，而目标检测任务除了语义信息还需要目标的位置信息）</p>
+<p>针对这两个问题，RBG又提出Fast R-CNN, 一个精简而快速的目标检测框架。 </p>
+<h2 id="Fast-R-CNN-ICCV2015"><a href="#Fast-R-CNN-ICCV2015" class="headerlink" title="Fast R-CNN(ICCV2015)"></a>Fast R-CNN(ICCV2015)</h2><p>有了前边R-CNN和SPP-NET的介绍，直接看Fast R-CNN的框架图：</p>
+<center><img src="/2017/03/04/Why-FasterRCNN/2017-0307-005.png" alt="l2_1"></center>
+
+<p>与R-CNN框架图对比，可以发现主要有两处不同：一是最后一个卷积层后加了一个ROI pooling layer，二是损失函数使用了多任务损失函数(multi-task loss)，将边框回归直接加入到CNN网络中训练。</p>
+<ol>
+<li><p>ROI pooling layer实际上是SPP-NET的一个精简版，SPP-NET对每个proposal使用了不同大小的金字塔映射，而ROI pooling layer只需要下采样到一个7x7的特征图。对于VGG16网络conv5_3有512个特征图，这样所有region proposal对应了一个7<em>7</em>512维度的特征向量作为全连接层的输入。</p>
+</li>
+<li><p>R-CNN训练过程分为了三个阶段，而Fast R-CNN直接使用softmax替代SVM分类，同时利用多任务损失函数边框回归也加入到了网络中，这样整个的训练过程是端到端的(除去region proposal提取阶段)。</p>
+</li>
+<li><p>Fast R-CNN在网络微调的过程中，将部分卷积层也进行了微调，取得了更好的检测效果。</p>
+</li>
+</ol>
+<p><strong>性能对比数据：</strong></p>
+<center><img src="/2017/03/04/Why-FasterRCNN/2017-0307-006.png" alt="l2_1"></center>
+
+
+<p><strong>1）Fast R-CNN优点：</strong></p>
+<p>Fast R-CNN融合了R-CNN和SPP-NET的精髓，并且引入多任务损失函数，使整个网络的训练和测试变得十分方便。在Pascal VOC2007训练集上训练，在VOC2007测试的结果为66.9%(mAP)，如果使用VOC2007+2012训练集训练，在VOC2007上测试结果为70%（数据集的扩充能大幅提高目标检测性能）。使用VGG16每张图像总共需要3s左右。</p>
+<p><strong>2）Fast R-CNN 缺点：</strong></p>
+<p>Region Proposal的提取使用selective search，目标检测时间大多消耗在这上面（提Region Proposal 2~3s，而提特征分类只需0.32s），无法满足实时应用，而且并没有实现真正意义上的端到端训练测试（region proposal使用selective search先提取处来）。那么有没有可能直接使用CNN直接产生Region Proposal并对其分类？Faster R-CNN框架就是符合这样需要的目标检测框架。</p>
+<h2 id="Faster-R-CNN-NIPS2015"><a href="#Faster-R-CNN-NIPS2015" class="headerlink" title="Faster R-CNN(NIPS2015)"></a>Faster R-CNN(NIPS2015)</h2><p><strong>Faster R-CNN:</strong> Towards Real-Time Object Detection with Region Proposal Networks</p>
+<p>在Region Proposal + CNN分类的这种目标检测框架中，Region Proposal质量好坏直接影响到目标检测任务的精度。如果找到一种方法只提取几百个或者更少的高质量的假选窗口，而且召回率很高，这不但能加快目标检测速度，还能提高目标检测的性能（假阳例少）。RPN(Region Proposal Networks)网络应运而生。</p>
+<p><strong>1）RPN的核心思想</strong></p>
+<p>是使用卷积神经网络直接产生Region Proposal，使用的方法本质上就是滑动窗口。RPN的设计比较巧妙，RPN只需在最后的卷积层上滑动一遍，因为Anchor机制和边框回归可以得到多尺度多长宽比的Region Proposal。</p>
+<p><strong>2）Faster R-CNN架构</strong></p>
+<center><img src="/2017/03/04/Why-FasterRCNN/2017-0307-008.png" alt="l2_1"></center>
+
+<p><strong>3）RPN架构</strong></p>
+<p>RPN采用任意大小的的图像作为输入，并输出一组候选的矩形，每个矩形都有一个对象分数。</p>
+<p>RPN被用于训练直接产生候选区域，不需要外部的候选区域。</p>
+<center><img src="/2017/03/04/Why-FasterRCNN/2017-0307-009.png" alt="l2_1"></center>
+
+<center><img src="/2017/03/04/Why-FasterRCNN/2017-0307-010.png" alt="l2_1"></center>
+
+<center><img src="/2017/03/04/Why-FasterRCNN/2017-0307-011.png" alt="l2_1"></center>
+
+<center><img src="/2017/03/04/Why-FasterRCNN/2017-0307-012.png" alt="l2_1"></center>
+
+
+<p>Anchor是滑动窗口的中心，它与尺度和长宽比相关，默认采3种尺度（128,256,512），3种长宽比（1:1,1:2,2:1)，则在每一个滑动位置k=9 anchors。</p>
+<p>直接看上边的RPN网络结构图（使用了ZF<zeiler and="" fergus="" model="">模型），给定输入图像（假设分辨率为600<em>1000），经过卷积操作得到最后一层的卷积特征图（大小约为40</em>60）。在这个特征图上使用3<em>3的卷积核（滑动窗口）与特征图进行卷积，最后一层卷积层共有256个feature map，那么这个3</em>3的区域卷积后可以获得一个256维的特征向量，后边接cls layer(box-classification layer)和reg layer(box-regression layer)分别用于分类和边框回归（跟Fast R-CNN类似，只不过这里的类别只有目标和背景两个类别）。3<em>3滑窗对应的每个特征区域同时预测输入图像3种尺度（128,256,512），3种长宽比（1:1,1:2,2:1）的region proposal，这种映射的机制称为anchor。所以对于这个40</em>60的feature map，总共有约20000(40<em>60</em>9)个anchor，也就是预测20000个region proposal。</zeiler></p>
+<p><strong>这样设计的好处是什么呢？</strong></p>
+<p>虽然现在也是用的滑动窗口策略，但是：滑动窗口操作是在卷积层特征图上进行的，维度较原始图像降低了16<em>16倍（中间经过了4次2</em>2的pooling操作）；多尺度采用了9种anchor，对应了三种尺度和三种长宽比，加上后边接了边框回归，所以即便是这9种anchor外的窗口也能得到一个跟目标比较接近的region proposal。</p>
+<p><strong>4）总结</strong><br>Faster R-CNN将一直以来分离的region proposal和CNN分类融合到了一起，使用端到端的网络进行目标检测，无论在速度上还是精度上都得到了不错的提高。然而Faster R-CNN还是达不到实时的目标检测，预先获取Region Proposal，然后在对每个Proposal分类计算量还是比较大。比较幸运的是YOLO这类目标检测方法的出现让实时性也变的成为可能。</p>
+<p>总的来说，从R-CNN, SPP-NET, Fast R-CNN, Faster R-CNN一路走来，基于深度学习目标检测的流程变得越来越精简，精度越来越高，速度也越来越快。可以说基于Region Proposal的R-CNN系列目标检测方法是当前目标最主要的一个分支。       </p>
+<h2 id="R-FCN（2016-5）"><a href="#R-FCN（2016-5）" class="headerlink" title="R-FCN（2016.5）"></a>R-FCN（2016.5）</h2><p>《<strong>R-FCN:</strong> Object Detection via Region-based Fully Convolutional Networks》</p>
+<p>顾名思议：全卷积网络，就是全部是卷积层，而没有全连接层(fc)。</p>
+<p>R-FCN(基于区域的检测器）的方法是：在整个图像上共享计算，通过移除最后的fc层实现(即删除了所有的子网络)。使用“位置敏感的得分图”来解决了图像分类平移不变性与对象检测平移变化之间的矛盾。</p>
+<p>此矛盾为：物体分类要求平移不变性越大越好 (图像中物体的移动不用区分)，而物体检测要求有平移变化。所以，ImageNet 分类领先的结果证明尽可能有平移不变性的全卷积结构更受亲睐。另一方面，物体检测任务需要一些平移变化的定位表示。比如，物体的平移应该使网络产生响应，这些响应对描述候选框覆盖真实物体的好坏是有意义的。我们假设图像分类网络的卷积层越深，则该网络对平移越不敏感。</p>
+<p>CNN随着网络深度的增加，网络对于位置（Position）的敏感度越来越低，也就是所谓的translation-invariance，但是在Detection的时候，需要对位置信息有很强的的敏感度。</p>
+<p>那么ResNet-101的detection是怎么做的？</p>
+<p>在R-FCN之前，很简单，把ROI-pooling层放到了前面的卷积层，然后后面的卷积层不共享计算，这样一可以避免过多的信息损失，二可以用后来的卷积层学习位置信息。</p>
+<p>R-FCN：采用全卷积网络结构作为 FCN，为给 FCN 引入平移变化，用专门的卷积层构建位置敏感分数地图 (position-sensitive score maps)。每个空间敏感地图编码感兴趣区域的相对空间位置信息。 在FCN上面增加1个位置敏感 RoI 池化层来监管这些分数地图。</p>
+<p>R-FCN思路就是利用最后一层网络通过FCN构成一个position-sensitive的feature map。具体而言，每一个proposal的位置信息都需要编码，那么先把proposal分成k<em>k个grid，然后对每一个grid进行编码。在最后一层map之后，再使用卷积计算产生一个k</em>k<em>(C+1)的map（k</em>k代表总共的grid数目，C代表class num，+1代表加入一个背景类）。</p>
+<center><img src="/2017/03/04/Why-FasterRCNN/2017-0307-013.png" alt="l2_1"></center>
+
+<center><img src="/2017/03/04/Why-FasterRCNN/2017-0307-014.png" alt="l2_1"></center>
+
+<p> RPN 给出感兴趣区域，R-FCN 对该感兴趣区域分类。R-FCN 在与 RPN 共享的卷积层后多加1个卷积层。所以，R-FCN 与 RPN 一样，输入为整幅图像。但 R-FCN 最后1个卷积层的输出从整幅图像的卷积响应图像中分割出感兴趣区域的卷积响应图像。</p>
+<p>R-FCN 最后1个卷积层在整幅图像上为每类生成k<em>k个位置敏感分数图，有C类物体外加1个背景，因此有k</em>k(C+1)个通道的输出层。k*k个分数图对应描述位置的空间网格。比如，k×k=3×3，则9个分数图编码单个物体类的 {top−left,top−center,top−right,…,bottom−right}。</p>
+<p>R-FCN 最后用位置敏感 RoI 池化层，给每个 RoI 1个分数。选择性池化图解：看上图的橙色响应图像 (top−left)，抠出橙色方块 RoI，池化橙色方块 RoI 得到橙色小方块 (分数)；其它颜色的响应图像同理。对所有颜色的小方块投票 (或池化) 得到1类的响应结果。</p>
+<hr>
+<p>产生完了这张map之后，再根据proposal产生一个长宽各为k，channel数目为C+1的score map。具体产生score map的方法是，假如k=3，C=20，那么score map的20个类每个类都有3<em>3的feature，一共9个格子，每一个格子都记录了空间信息。而这每一个类的每一个格子都对应前面那个channel数为3</em>3*21的大map的其中一个channel的map。现在把score map中的格子对应的区域的map中的信息取平均，然后这个平均值就是score map格子中的值。最后把score map的值进行vote（avg pooling）来形成一个21维的向量来做分类即可。</p>
+<center><img src="/2017/03/04/Why-FasterRCNN/2017-0307-015.png" alt="l2_1"></center>
+
+<center><img src="/2017/03/04/Why-FasterRCNN/2017-0307-016.png" alt="l2_1"></center>
+
+
+<p>当分类正确时，该类通道的位置敏感分数图 (中间) 的大多数橙色实线网格内的响应在整个 RoI 位置范围内最强。</p>
+<p>对应的bbox regression只需要把C+1设成4就可以了。</p>
+<p>R-FCN采用的一些方法比Faster R-CNN的baseline提高了3个点，并且比原来Faster R-CNN更快（因为全部计算都共享了）。但是和改进过的Faster R-CNN相比（ROI Pooling提前那种）提高了0.2个点，速度快了2.5倍。所以目前为止这个方法的结果应该是所有方法中速度和Performance结合的最好的。</p>
+<h2 id="再谈Faster-RCNN思想"><a href="#再谈Faster-RCNN思想" class="headerlink" title="再谈Faster-RCNN思想"></a>再谈Faster-RCNN思想</h2><p>从RCNN到fast RCNN，再到faster RCNN，目标检测的四个基本步骤（<strong>候选区域生成</strong>，<strong>特征提取</strong>，<strong>分类</strong>，<strong>位置精修</strong>）终于被统一到一个深度网络框架之内。所有计算没有重复，<strong>完全在GPU中完成</strong>，大大提高了运行速度。 </p>
+<center><img src="/2017/03/04/Why-FasterRCNN/2017-0306-001.jpg" alt="l2_1"></center>
+
+<p>faster RCNN可以简单地看做“<strong>区域生成网络+fast RCNN</strong>“的系统，用区域生成网络代替fast RCNN中的<strong>Selective Search</strong>方法。本篇论文着重解决了这个系统中的三个问题：</p>
+<ol>
+<li>如何设计区域生成网络 </li>
+<li>如何训练区域生成网络 </li>
+<li>如何让区域生成网络和fast RCNN网络共享特征提取网络</li>
+</ol>
+<h2 id="区域生成网络：结构"><a href="#区域生成网络：结构" class="headerlink" title="区域生成网络：结构"></a>区域生成网络：结构</h2><p>基本设想是：在提取好的特征图上，<strong>对所有可能的候选框进行判别</strong>。由于后续还有位置精修步骤，所以候选框实际比较稀疏。</p>
+<center><img src="/2017/03/04/Why-FasterRCNN/2017-0306-002.jpg" alt="l2_1"></center>
+
+<h3 id="特征提取"><a href="#特征提取" class="headerlink" title="特征提取"></a>特征提取</h3><p>原始特征提取（上图灰色方框）包含若干层conv+relu，直接套用ImageNet上常见的分类网络即可。本文试验了两种网络：5层的ZF[3]，16层的VGG-16[4]，具体结构不再赘述。<br><strong>额外添加一个conv+relu层，输出51<em>39</em>256维特征（feature）。</strong></p>
+<h3 id="Region-Proposal-Networks的设计和训练思路"><a href="#Region-Proposal-Networks的设计和训练思路" class="headerlink" title="Region Proposal Networks的设计和训练思路"></a>Region Proposal Networks的设计和训练思路</h3> <center><img src="/2017/03/04/Why-FasterRCNN/2017-0306-003.png" alt="l2_1"></center>
+
+<p>上图是<strong>RPN的网络流程图</strong>，即也是利用了SPP的映射机制，从<strong>conv5上进行滑窗</strong>来替代从原图滑窗。<br>不过，要如何训练出一个网络来替代<strong>selective search</strong>相类似的功能呢？<br>实际上思路很简单，就是先通过SPP根据一一对应的点从conv5映射回原图，根据设计不同的固定初始尺度训练一个网络，就是给它大小不同（但设计固定）的region图，然后根据与ground truth的覆盖率给它正负标签，让它学习里面是否有object即可。</p>
+<p>这就又变成介绍RCNN之前提出的traditional method，训练出一个能检测物体的网络，然后对整张图片进行滑窗判断，不过这样子的话由于无法判断<strong>region尺度</strong>和<strong>scale ratio</strong>，故需要多次放缩，这样子测试，估计判断一张图片是否有物体就需要很久。(传统hog+svm-&gt;dpm)</p>
+<hr>
+<p>如何降低这一部分的复杂度？</p>
+<p>要知道我们只需要找出大致的地方，无论是精确定位位置还是尺寸，后面的工作都可以完成，这样子的话，与其说用小网络，简单的学习（这样子估计和蒙差不多了，反正有无物体也就50%的概率），还不如用深的网络，固定尺度变化，固定scale ratio变化，固定采样方式（反正后面的工作能进行调整，更何况它本身就可以对box的位置进行调整）这样子来降低任务复杂度呢。</p>
+<p>这里有个很不错的地方就是在前面可以共享卷积计算结果，这也算是用深度网络的另一个原因吧。而这三个固定，我估计也就是为什么文章叫这些proposal为anchor的原因了。这个网络的结果就是卷积层的每个点都有有关于k个achor boxes的输出，包括是不是物体，调整box相应的位置。这相当于给了比较死的初始位置（三个固定），然后来大致判断是否是物体以及所对应的位置.</p>
+<p>这样子的话RPN所要做的也就完成了，这个网络也就完成了它应该完成的使命，剩下的交给其他部分完成。</p>
+<h3 id="候选区域（anchor）"><a href="#候选区域（anchor）" class="headerlink" title="候选区域（anchor）"></a>候选区域（anchor）</h3><p>特征可以看做一个尺度51x39的256通道图像，对于该图像的每一个位置，考虑9个可能的候选窗口：三种面积{128,256,512}×    三种比例{1:1,1:2,2:1}。<br>这些候选窗口称为<strong>anchors</strong>。</p>
+<p>下图示出51*39个anchor中心，以及9种anchor示例。 </p>
+ <center><img src="/2017/03/04/Why-FasterRCNN/2017-0306-005.png" alt="l2_1"></center>
+
+<p><strong>关于anchor的问题：</strong></p>
+<p>这里在详细解释一下:(1)首先按照尺度和长宽比生成9种anchor,这9个anchor的意思是conv5 feature map 3x3的滑窗对应原图区域的大小.这9个anchor对于任意输入的图像都是一样的，所以只需要计算一次. 既然大小对应关系有了，下一步就是中心点对应关系，接下来(2)对于每张输入图像，根据图像大小计算conv5 3x3滑窗对应原图的中心点.   有了中心点对应关系和大小对应关系，映射就显而易见了.</p>
+<p>在整个faster RCNN算法中，有三种尺度。</p>
+<ol>
+<li><strong>原图尺度</strong>：原始输入的大小。不受任何限制，不影响性能。 </li>
+<li><strong>归一化尺度</strong>：输入特征提取网络的大小，在测试时设置，源码中opts.test_scale=600。anchor在这个尺度上设定。这个参数和anchor的相对大小决定了想要检测的目标范围。 </li>
+<li><strong>网络输入尺度</strong>：输入特征检测网络的大小，在训练时设置，源码中为224*224。</li>
+</ol>
+<h3 id="Region-Proposal-Networks"><a href="#Region-Proposal-Networks" class="headerlink" title="Region Proposal Networks"></a>Region Proposal Networks</h3><p>RPN的目的是实现”attention”机制,告诉后续的扮演检测\识别\分类角色的Fast-RCNN应该注意哪些区域,它从任意尺寸的图片中得到一系列的带有 objectness score 的 object proposals。<br>具体流程是：使用一个小的网络在已经进行通过卷积计算得到的feature map上进行滑动扫描，这个小的网络每次在一个feature map上的一个窗口进行滑动(这个窗口大小为n<em>n—-在这里,再次看到神经网络中用于缩减网络训练参数的局部感知策略receptive field,通常n=228在VGG-16,而作者论文使用n=3)，滑动操作后映射到一个低维向量(例如256D或512D,这里说256或512是低维,Q:n=3,n</em>n=9,为什么256是低维呢?那么解释一下:低维相对不是指窗口大小,窗口是用来滑动的!256相对的是a convolutional feature map of a size W × H (typically ∼2,400),而2400这个特征数很大,所以说256是低维.另外需要明白的是:这里的256维里的每一个数都是一个Anchor(由2400的特征数滑动后操作后,再进行压缩))最后将这个低维向量送入到两个独立\平行的全连接层:box回归层（a box-regression layer (reg)）和box分类层（a box-classification layer (cls)）<br>Translation-Invariant Anchors<br>   在计算机视觉中的一个挑战就是平移不变性:比如人脸识别任务中,小的人脸(24<em>24的分辨率)和大的人脸(1080</em>720)如何在同一个训练好权值的网络中都能正确识别. 传统有两种主流的解决方式：<br>第一:对图像或feature map层进行尺度\宽高的采样;<br>第二,对滤波器进行尺度\宽高的采样(或可以认为是滑动窗口).<br>但作者的解决该问题的具体实现是:通过卷积核中心(用来生成推荐窗口的Anchor)进行尺度、宽高比的采样。如上图右边，文中使用了3 scales and 3 aspect ratios （1:1,1:2,2:1）, 就产生了 k = 9 anchors at each sliding position. </p>
+<h3 id="窗口分类和位置精修"><a href="#窗口分类和位置精修" class="headerlink" title="窗口分类和位置精修"></a>窗口分类和位置精修</h3><p>分类层（cls_score）输出每一个位置上，9个anchor属于前景和背景的概率；窗口回归层（bbox_pred）输出每一个位置上，9个anchor对应窗口应该平移缩放的参数。<br>对于每一个位置来说，分类层从256维特征中输出属于前景和背景的概率；窗口回归层从256维特征中输出4个平移缩放参数。</p>
+<p>就局部来说，这两层是全连接网络；就全局来说，由于网络在所有位置（共51*39个）的参数相同，所以实际用尺寸为1×1的卷积网络实现。</p>
+<p>需要注意的是：并没有显式地提取任何候选窗口，完全使用网络自身完成判断和修正。</p>
+<h2 id="区域生成网络：训练"><a href="#区域生成网络：训练" class="headerlink" title="区域生成网络：训练"></a>区域生成网络：训练</h2><h3 id="样本"><a href="#样本" class="headerlink" title="样本"></a>样本</h3><p>考察训练集中的每张图像： </p>
+<ol>
+<li>对每个标定的真值候选区域，与其重叠比例最大的anchor记为前景样本 </li>
+<li>对1)剩余的anchor，如果其与某个标定重叠比例大于0.7，记为前景样本；如果其与任意一个标定的重叠比例都小于0.3，记为背景样本 </li>
+<li>对1),2)剩余的anchor，弃去不用。 </li>
+<li>跨越图像边界的anchor弃去不用</li>
+</ol>
+<h3 id="代价函数"><a href="#代价函数" class="headerlink" title="代价函数"></a>代价函数</h3><p>同时最小化两种代价：</p>
+<ol>
+<li>分类误差 </li>
+<li>前景样本的窗口位置偏差 </li>
+</ol>
+<h3 id="超参数"><a href="#超参数" class="headerlink" title="超参数"></a>超参数</h3><p>原始特征提取网络使用ImageNet的分类样本初始化，其余新增层随机初始化。<br>每个mini-batch包含从一张图像中提取的256个anchor，前景背景样本1:1.<br>前60K迭代，学习率0.001，后20K迭代，学习率0.0001。<br>momentum设置为0.9，weight decay设置为0.0005。[5]</p>
+<h3 id="共享特征"><a href="#共享特征" class="headerlink" title="共享特征"></a>共享特征</h3><p>区域生成网络（RPN）和fast RCNN都需要一个原始特征提取网络（下图灰色方框）。这个网络使用ImageNet的分类库得到初始参数W0，但要如何精调参数，使其同时满足两方的需求呢？本文讲解了三种方法。 </p>
+ <center><img src="/2017/03/04/Why-FasterRCNN/2017-0306-006.png" alt="l2_1"></center>
+
+<h3 id="轮流训练"><a href="#轮流训练" class="headerlink" title="轮流训练"></a>轮流训练</h3><ol>
+<li>从W0开始，训练RPN。用RPN提取训练集上的候选区域 </li>
+<li>从W0开始，用候选区域训练Fast RCNN，参数记为W1 </li>
+<li>从W1开始，训练RPN… </li>
+<li>具体操作时，仅执行两次迭代，并在训练时冻结了部分层。论文中的实验使用此方法。<br>如Ross Girshick在ICCV 15年的讲座Training R-CNNs of various velocities中所述，采用此方法没有什么根本原因，主要是因为”实现问题，以及截稿日期“。</li>
+</ol>
+<h3 id="近似联合训练"><a href="#近似联合训练" class="headerlink" title="近似联合训练"></a>近似联合训练</h3><p>直接在上图结构上训练。在backward计算梯度时，把提取的ROI区域当做固定值看待；在backward更新参数时，来自RPN和来自Fast RCNN的增量合并输入原始特征提取层。<br>此方法和前方法效果类似，但能将训练时间减少20%-25%。公布的python代码中包含此方法。</p>
+<h3 id="联合训练"><a href="#联合训练" class="headerlink" title="联合训练"></a>联合训练</h3><p>直接在上图结构上训练。但在backward计算梯度时，要考虑ROI区域的变化的影响。推导超出本文范畴，请参看15年NIP论文[6]。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>除了开篇提到的基本性能外，还有一些值得注意的结论:</p>
+<p>与Selective Search方法（黑）相比，当每张图生成的候选区域从2000减少到300时，本文RPN方法（红蓝）的召回率下降不大。说明RPN方法的目的性更明确。 </p>
+ <center><img src="/2017/03/04/Why-FasterRCNN/2017-0306-007.png" alt="l2_1"></center>
+
+<p>使用更大的Microsoft COCO库[7]训练，直接在PASCAL VOC上测试，准确率提升6%。说明faster RCNN迁移性良好，没有over fitting。</p>
+ <center><img src="/2017/03/04/Why-FasterRCNN/2017-0306-008.png" alt="l2_1"></center>
+
+<h2 id="提高目标检测方法"><a href="#提高目标检测方法" class="headerlink" title="提高目标检测方法"></a>提高目标检测方法</h2><p>R-CNN系列目标检测框架和YOLO目标检测框架给了我们进行目标检测的两个基本框架。除此之外，研究人员基于这些框架从其他方面入手提出了一系列提高目标检测性能的方法。</p>
+<ol>
+<li><p><strong>难分样本挖掘（hard negative mining）</strong><br>R-CNN在训练SVM分类器时使用了难分样本挖掘的思想，但Fast R-CNN和Faster R-CNN由于使用端到端的训练策略并没有使用难分样本挖掘（只是设置了正负样本的比例并随机抽取）。CVPR2016的Training Region-based Object Detectors with Online Hard Example Mining(oral)将难分样本挖掘(hard example mining)机制嵌入到SGD算法中，使得Fast R-CNN在训练的过程中根据region proposal的损失自动选取合适的Region Proposal作为正负例训练。实验结果表明使用OHEM（Online Hard Example Mining）机制可以使得Fast R-CNN算法在VOC2007和VOC2012上mAP提高 4%左右。</p>
+</li>
+<li><p><strong>多层特征融合</strong><br>Fast R-CNN和Faster R-CNN都是利用了最后卷积层的特征进行目标检测，而由于高层的卷积层特征已经损失了很多细节信息（pooling操作），所以在定位时不是很精准。HyperNet等一些方法则利用了CNN的多层特征融合进行目标检测，这不仅利用了高层特征的语义信息，还考虑了低层特征的细节纹理信息，使得目标检测定位更精准。</p>
+</li>
+<li><p><strong>使用上下文信息</strong><br>在提取Region Proposal特征进行目标检测时，结合Region Proposal上下文信息，检测效果往往会更好一些。（Object detection via a multi-region &amp; semantic segmentation-aware CNN model以及Inside-Outside Net等论文中都使用了上下文信息）</p>
+</li>
+</ol>
+
       
     </div>
 
@@ -381,6 +640,12 @@
 
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/目标检测/" rel="tag"># 目标检测</a>
+          
+        </div>
       
 
       
@@ -402,6 +667,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/05/MeanShift-Clustering/" rel="prev" title="MeanShift Clustering">
+                MeanShift Clustering <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -482,8 +751,17 @@ var duoshuoQuery = {short_name:"verdin"};
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -498,7 +776,7 @@ var duoshuoQuery = {short_name:"verdin"};
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -509,7 +787,7 @@ var duoshuoQuery = {short_name:"verdin"};
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -534,6 +812,22 @@ var duoshuoQuery = {short_name:"verdin"};
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-计算机视觉任务"><span class="nav-number">1.</span> <span class="nav-text">1. 计算机视觉任务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-传统目标检测方法"><span class="nav-number">2.</span> <span class="nav-text">2. 传统目标检测方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-基于侯选区域-Region-Proposal-的深度学习目标检测"><span class="nav-number">3.</span> <span class="nav-text">3. 基于侯选区域(Region Proposal)的深度学习目标检测</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#R-CNN-CVPR2014-TPAMI2015"><span class="nav-number">3.1.</span> <span class="nav-text">R-CNN (CVPR2014, TPAMI2015)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SPP-NET-ECCV2014-TPAMI2015"><span class="nav-number">3.2.</span> <span class="nav-text">SPP-NET (ECCV2014, TPAMI2015)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fast-R-CNN-ICCV2015"><span class="nav-number">3.3.</span> <span class="nav-text">Fast R-CNN(ICCV2015)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Faster-R-CNN-NIPS2015"><span class="nav-number">3.4.</span> <span class="nav-text">Faster R-CNN(NIPS2015)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#R-FCN（2016-5）"><span class="nav-number">3.5.</span> <span class="nav-text">R-FCN（2016.5）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#再谈Faster-RCNN思想"><span class="nav-number">3.6.</span> <span class="nav-text">再谈Faster-RCNN思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区域生成网络：结构"><span class="nav-number">3.7.</span> <span class="nav-text">区域生成网络：结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特征提取"><span class="nav-number">3.7.1.</span> <span class="nav-text">特征提取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Region-Proposal-Networks的设计和训练思路"><span class="nav-number">3.7.2.</span> <span class="nav-text">Region Proposal Networks的设计和训练思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#候选区域（anchor）"><span class="nav-number">3.7.3.</span> <span class="nav-text">候选区域（anchor）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Region-Proposal-Networks"><span class="nav-number">3.7.4.</span> <span class="nav-text">Region Proposal Networks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#窗口分类和位置精修"><span class="nav-number">3.7.5.</span> <span class="nav-text">窗口分类和位置精修</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区域生成网络：训练"><span class="nav-number">3.8.</span> <span class="nav-text">区域生成网络：训练</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#样本"><span class="nav-number">3.8.1.</span> <span class="nav-text">样本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代价函数"><span class="nav-number">3.8.2.</span> <span class="nav-text">代价函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#超参数"><span class="nav-number">3.8.3.</span> <span class="nav-text">超参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#共享特征"><span class="nav-number">3.8.4.</span> <span class="nav-text">共享特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#轮流训练"><span class="nav-number">3.8.5.</span> <span class="nav-text">轮流训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#近似联合训练"><span class="nav-number">3.8.6.</span> <span class="nav-text">近似联合训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#联合训练"><span class="nav-number">3.8.7.</span> <span class="nav-text">联合训练</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验"><span class="nav-number">3.9.</span> <span class="nav-text">实验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提高目标检测方法"><span class="nav-number">3.10.</span> <span class="nav-text">提高目标检测方法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
